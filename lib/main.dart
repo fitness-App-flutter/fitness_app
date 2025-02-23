@@ -1,18 +1,26 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness_app/auth/authintication/login_cubit.dart';
 import 'package:fitness_app/auth/authintication/sign_up_cubit.dart';
 import 'package:fitness_app/firebase_options.dart';
 import 'package:fitness_app/views/enter_code_screen.dart';
 import 'package:fitness_app/views/login_screen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -30,7 +38,10 @@ class MyApp extends StatelessWidget {
           create: (context) => SignUpCubit(),
         )
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
+        useInheritedMediaQuery: true,
+        locale: DevicePreview.locale(context),
+        builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
         home: LoginScreen(),
       ),

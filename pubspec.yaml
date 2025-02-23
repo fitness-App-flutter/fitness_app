@@ -41,6 +41,9 @@ dependencies:
   flutter_bloc: ^9.0.0
   modal_progress_hud_nsn: ^0.5.1
   firebase_auth: ^5.4.2
+  device_preview: ^1.2.0
+  flutter_gemma: ^0.6.0
+  get: ^4.7.2
 
 dev_dependencies:
   flutter_test:

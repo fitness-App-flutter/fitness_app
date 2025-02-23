@@ -46,7 +46,7 @@ void ShowDialog(BuildContext context, massage) {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           massage,
-                          style: TextStyle(color: Colors.black54),
+                          style: const TextStyle(color: Colors.black54),
                           textAlign: TextAlign.center,
                           overflow: TextOverflow.visible,
                         ),
@@ -58,12 +58,12 @@ void ShowDialog(BuildContext context, massage) {
               Positioned(
                 top: -30,
                 child: CircleAvatar(
-                  backgroundColor: Color(0xff626ae7),
+                  backgroundColor: const Color(0xff626ae7),
                   maxRadius: 32,
                   child: Card(
-                    color: Color(0xff626ae7),
+                    color: const Color(0xff626ae7),
                     elevation:16,
-                    shadowColor: Color(0xff626ae7),
+                    shadowColor: const Color(0xff626ae7),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32)),
                     child: const Icon(Icons.check,color: Colors.white,size: 64,),
