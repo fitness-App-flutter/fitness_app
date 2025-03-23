@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/widgets/colors.dart';
 
 class HeightSelector extends StatelessWidget {
   final int height;
@@ -6,55 +7,40 @@ class HeightSelector extends StatelessWidget {
   final VoidCallback onDecrease;
 
   const HeightSelector({
-    super.key,
+    Key? key,
     required this.height,
     required this.onIncrease,
     required this.onDecrease,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text("Height (cm)"),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
-          // Padding inside the border
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey, width: .5),
-            // Border color & width
-            borderRadius: BorderRadius.circular(10), // Rounded corners
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(height.toString(),
-                  style: const TextStyle(fontSize: 18)),
-              Card(
-                color: Colors.grey[200],
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                child: IconButton(
-                  onPressed: onDecrease,
-                  icon: const Icon(
-                    Icons.remove,
-                    color: Colors.grey,
-                  ),
-                ),
-              ),
-              Card(
-                color: const Color(0xff626ae7),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                child: IconButton(
-                  onPressed: onIncrease,
-                  icon: const Icon(
-                    Icons.add,color: Colors.white, ),
-                  ),
-                ),
-            ],
-          ),
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text("Height (cm)"),
+      Container(
+        padding: EdgeInsets.symmetric(horizontal: 6, vertical: 1), // Padding inside the border
+        decoration: BoxDecoration(
+          border: Border.all(color: MyColors.border, width:.5), // Border color & width
+          borderRadius: BorderRadius.circular(10), // Rounded corners
         ),
-      ],
-    );
-  }
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              onPressed: onDecrease,
+              icon: const Icon(Icons.remove),
+            ),
+            Text(height.toString(), style: const TextStyle(fontSize: 18)),
+            IconButton(
+              onPressed: onIncrease,
+              icon: const Icon(Icons.add),
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
+}
 }

@@ -8,13 +8,13 @@ class CustomDropdown extends StatelessWidget {
   final ValueChanged<String?> onChanged;
 
   const CustomDropdown({
-    super.key,
+    Key? key,
     required this.label,
     required this.hint,
     required this.items,
     required this.onChanged,
     this.value,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class CustomDropdown extends StatelessWidget {
       children: [
         Text(label),
         Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12), // Padding inside the border
+        padding: EdgeInsets.symmetric(horizontal: 12), // Padding inside the border
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey, width: .5), // Border color & width
           borderRadius: BorderRadius.circular(10), // Rounded corners

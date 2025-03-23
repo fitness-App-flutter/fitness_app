@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/widgets/colors.dart';
 
 class CurvedContainer extends StatelessWidget {
   final Widget child;
+  final Color color;
   final double heightFactor;
 
   const CurvedContainer({
-    super.key,
+    Key? key,
     required this.child,
-    this.heightFactor = 0.5,
-  });
+    this.color = MyColors.bluee,
+    this.heightFactor = 0.4,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +21,8 @@ class CurvedContainer extends StatelessWidget {
         clipper: CurvedClipper(),
         child: Container(
           height: MediaQuery.of(context).size.height * heightFactor,
-          color: const Color(0xff626ae7),
-          padding: const EdgeInsets.only(left: 20,right: 20,top: 60),
+          color: color,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
           child: child,
         ),
       ),

@@ -9,14 +9,14 @@ class CustomSlider extends StatelessWidget {
   final ValueChanged<double> onChanged;
 
   const CustomSlider({
-    super.key,
+    Key? key,
     required this.label,
     required this.value,
     required this.min,
     required this.max,
     required this.divisions,
     required this.onChanged,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,6 @@ class CustomSlider extends StatelessWidget {
         SizedBox(
           width: 180, // Adjust width for better UI
           child: Slider(
-            activeColor: const Color(0xff626ae7),
             value: value,
             min: min,
             max: max,

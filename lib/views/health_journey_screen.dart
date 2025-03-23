@@ -1,6 +1,7 @@
-import 'package:fitness_app/widgets/curved_container.dart';
-import 'package:fitness_app/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:test_app/widgets/colors.dart';
+import 'package:test_app/widgets/curved_container.dart';
+import 'package:test_app/widgets/custom_button.dart';
 
 class HealthJourneyScreen extends StatelessWidget {
   const HealthJourneyScreen({super.key});
@@ -15,44 +16,42 @@ class HealthJourneyScreen extends StatelessWidget {
             child: Image.asset(
               'assets/images/runner.jpg', // Replace with your image path
               fit: BoxFit.fill,
-
             ),
           ),
           // Curved Container with content
           CurvedContainer(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Icon
-                  const SizedBox(height: 10,),
-                  const CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.white,
-                    child:SizedBox(width: 50,child: Image(image: AssetImage("assets/images/shose.png"),),)
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Icon
+                CircleAvatar(
+                  radius: 30,
+                  backgroundColor: MyColors.white,
+                  child: const Icon(
+                    Icons.directions_run,
+                    color: Colors.blueAccent,
+                    size: 30,
                   ),
-                  const SizedBox(height: 10),
-                  // Text
-                  Text(
-                    "Let's start your health journey today with us!",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey[300],
-                    ),
+                ),
+                const SizedBox(height: 50),
+                // Text
+                 Text(
+                  "Let's start your health journey today with us!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color:  MyColors.white,
                   ),
-                  const SizedBox(height: 20),
-                  // Continue Button
-                  CustomButton(
-                    text: "Continue",
-                    onPressed: () {
-
-                    },
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(height: 20),
+                // Continue Button
+                CustomButton(
+                  text: "Continue",
+                  onPressed: () {},
+                ),
+              ],
             ),
           ),
         ],

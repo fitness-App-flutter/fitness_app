@@ -1,6 +1,6 @@
-import 'package:fitness_app/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:test_app/widgets/custom_button.dart';
 
 class CodeScreen extends StatelessWidget {
   const CodeScreen({super.key});
@@ -8,19 +8,17 @@ class CodeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: SingleChildScrollView(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 100),
               const Text(
                 "Enter CODE 👋",
                 style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 120),
+              const SizedBox(height: 20),
 
               // Pinput for OTP input
               Pinput(
@@ -31,7 +29,7 @@ class CodeScreen extends StatelessWidget {
                   textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.grey),
+                    border: Border.all(color: Color(0xFF9E9E9E)),
                   ),
                 ),
               ),
