@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:test_app/widgets/custom_button.dart';
-import 'package:test_app/widgets/custom_text_field.dart';
-import 'package:test_app/widgets/screen_title.dart';
-class LoginScreen extends StatelessWidget {
+import 'package:test_app/widgets/colors.dart';
+import 'package:test_app/widgets/custom_button%20copy.dart';
+import 'package:test_app/widgets/custom_text_field%20copy.dart';
+import 'package:test_app/widgets/screen_title%20copy.dart';
+
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +34,20 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 20),
 
             // Password Field
-            const Text("Password", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          const Text("Password", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
-            const CustomTextField(hintText: "Enter your password", obscureText: true),
+            CustomTextField(
+              hintText: "Enter your password",
+              obscureText: !_isPasswordVisible,
+              suffixIcon: IconButton(
+                icon: Icon(_isPasswordVisible ? Icons.visibility : Icons.visibility_off),
+                onPressed: () {
+                  setState(() {
+                    _isPasswordVisible = !_isPasswordVisible;
+                  });
+                },
+              ),
+            ),
             const SizedBox(height: 10),
 
             // Forgot Password
@@ -35,7 +55,7 @@ class LoginScreen extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {}, 
-                child: const Text("Forgot Password?", style: TextStyle(fontSize: 14, color: Colors.blue)),
+                child: const Text("Forgot Password?", style: TextStyle(fontSize: 14, color: MyColors.bluee)),
               ),
             ),
             const SizedBox(height: 20),
@@ -51,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                 const Text("Don't have an account?", style: TextStyle(fontSize: 14)),
                 TextButton(
                   onPressed: () {},
-                  child: const Text("Sign Up", style: TextStyle(fontSize: 14, color: Colors.blue)),
+                  child: const Text("Sign Up", style: TextStyle(fontSize: 14, color: MyColors.bluee)),
                 ),
               ],
             ),

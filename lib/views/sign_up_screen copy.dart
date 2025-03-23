@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:test_app/widgets/custom_button.dart';
-import 'package:test_app/widgets/custom_dropdown.dart';
-import 'package:test_app/widgets/custom_slider.dart';
-import 'package:test_app/widgets/custom_text_field.dart';
-import 'package:test_app/widgets/height_selector.dart';
+import 'package:test_app/widgets/colors.dart';
+import 'package:test_app/widgets/custom_button%20copy.dart';
+import 'package:test_app/widgets/custom_dropdown%20copy.dart';
+import 'package:test_app/widgets/custom_slider%20copy.dart';
+import 'package:test_app/widgets/custom_text_field%20copy.dart';
+import 'package:test_app/widgets/height_selector%20copy.dart';
+
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -116,8 +118,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Center(
               child: CustomButton(
                 text: "Sign Up",
-                backgroundColor: Colors.blue,
-                textColor: Colors.white,
+                backgroundColor:  MyColors.bluee,
+                textColor:  MyColors.white,
                 onPressed: () {},
               ),
             ),

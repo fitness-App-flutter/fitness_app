@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:test_app/views/sign_up_screen.dart';
-import 'views/health_journey_screen.dart';
-import 'views/enter_code_screen.dart';
-import 'views/forgot_password_screen.dart';
-import 'views/login_screen.dart';
-import 'views/reset_password_screen.dart';
+import 'package:test_app/views/health_journey_screen%20copy.dart';
+import 'package:test_app/views/enter_code_screen%20copy.dart';
+import 'package:test_app/views/forgot_password_screen%20copy.dart';
+import 'package:test_app/views/login_screen%20copy.dart';
+import 'package:test_app/views/reset_password_screen%20copy.dart';
+import 'package:test_app/views/sign_up_screen%20copy.dart';
+
 
 void main() {
   runApp(const MyApp());

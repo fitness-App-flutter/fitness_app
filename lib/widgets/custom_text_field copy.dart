@@ -1,5 +1,6 @@
 // TODO Implement this library.import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'package:test_app/widgets/colors.dart';
 class CustomTextField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
@@ -23,7 +24,7 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         filled: true,
-        fillColor: Colors.grey[200],
+        fillColor: MyColors.fillColor,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide.none,

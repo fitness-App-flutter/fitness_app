@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
-import 'package:test_app/widgets/custom_button.dart';
+import 'package:test_app/widgets/custom_button%20copy.dart';
+
 
 class CodeScreen extends StatelessWidget {
   const CodeScreen({super.key});
@@ -29,7 +30,7 @@ class CodeScreen extends StatelessWidget {
                   textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.grey),
+                    border: Border.all(color: Color(0xFF9E9E9E)),
                   ),
                 ),
               ),

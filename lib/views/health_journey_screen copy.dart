@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:test_app/widgets/curved_container.dart';
-import 'package:test_app/widgets/custom_button.dart';
+import 'package:test_app/widgets/colors.dart';
+import 'package:test_app/widgets/curved_container%20copy.dart';
+import 'package:test_app/widgets/custom_button%20copy.dart';
+
 
 class HealthJourneyScreen extends StatelessWidget {
   const HealthJourneyScreen({super.key});
@@ -24,10 +26,10 @@ class HealthJourneyScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Icon
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 30,
-                  backgroundColor: Colors.white,
-                  child: Icon(
+                  backgroundColor: MyColors.white,
+                  child: const Icon(
                     Icons.directions_run,
                     color: Colors.blueAccent,
                     size: 30,
@@ -35,13 +37,13 @@ class HealthJourneyScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 50),
                 // Text
-                const Text(
+                 Text(
                   "Let's start your health journey today with us!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color:  MyColors.white,
                   ),
                 ),
                 const SizedBox(height: 20),

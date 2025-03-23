@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/widgets/colors.dart';
 
 class CurvedContainer extends StatelessWidget {
   final Widget child;
@@ -8,7 +9,7 @@ class CurvedContainer extends StatelessWidget {
   const CurvedContainer({
     Key? key,
     required this.child,
-    this.color = Colors.blueAccent,
+    this.color = MyColors.bluee,
     this.heightFactor = 0.4,
   }) : super(key: key);
 

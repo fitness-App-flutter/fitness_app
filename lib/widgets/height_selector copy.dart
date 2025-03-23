@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/widgets/colors.dart';
 
 class HeightSelector extends StatelessWidget {
   final int height;
@@ -21,7 +22,7 @@ class HeightSelector extends StatelessWidget {
       Container(
         padding: EdgeInsets.symmetric(horizontal: 6, vertical: 1), // Padding inside the border
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey, width:.5), // Border color & width
+          border: Border.all(color: MyColors.border, width:.5), // Border color & width
           borderRadius: BorderRadius.circular(10), // Rounded corners
         ),
         child: Row(
