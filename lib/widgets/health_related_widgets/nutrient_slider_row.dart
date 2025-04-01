@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_sliders/sliders.dart'; // For SfSlider
-import 'package:syncfusion_flutter_core/theme.dart'; // For SfSliderTheme
-import 'custom_slider_thumb.dart'; // Import CustomSliderThumb
+import 'custom_slider.dart';
 
 class NutrientSliderRow extends StatelessWidget {
   final String nutrient;
@@ -19,16 +17,30 @@ class NutrientSliderRow extends StatelessWidget {
     required this.tooltipColor,
   });
 
+  // Set different max values based on nutrient type
+  double get maxValue {
+    switch (nutrient.toLowerCase()) {
+      case "fat":
+        return 150.0;
+      case "protein":
+        return 250.0;
+      case "carbs":
+        return 400.0;
+      default:
+        return 100.0; // Default fallback
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center, // Align items vertically
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Left Column: Category Circle & Label
+          // Nutrient Name with Circle Indicator
           SizedBox(
-            width: 120, // Fixed width for the category section
+            width: 120,
             child: Row(
               children: [
                 CircleAvatar(radius: 12, backgroundColor: color),
@@ -40,44 +52,34 @@ class NutrientSliderRow extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 16), // Spacing between category and slider
+          const SizedBox(width: 16),
 
-          // Slider + Dynamic Gram Display
+          // Value Display Box
+          Container(
+            width: 60,
+            height: 36,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              border: Border.all(color: color, width: 1.5),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Text(
+              "${value.toInt()}g",
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const SizedBox(width: 16),
+
+          // Custom Slider with adjusted max values
           Expanded(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                return Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    // Slider
-                    SfSliderTheme(
-                      data: SfSliderThemeData(
-                        tooltipBackgroundColor: tooltipColor,
-                      ),
-                      child: SfSlider(
-                        min: 0.0,
-                        max: 1000.0,
-                        value: value,
-                        showTicks: false,
-                        showLabels: false,
-                        enableTooltip: true,
-                        activeColor: color,
-                        inactiveColor: color.withOpacity(0.3),
-                        tooltipTextFormatterCallback: (dynamic value, String formattedText) {
-                          return "${value.toInt()}g";
-                        },
-                        thumbIcon: CustomSliderThumb(
-                          thumbRadius: 12,
-                          borderColor: color,
-                        ),
-                        onChanged: (dynamic newValue) {
-                          onChanged(newValue);
-                        },
-                      ),
-                    ),
-                  ],
-                );
-              },
+            child: CustomSlider(
+              value: value,
+              min: 0.0,
+              max: maxValue,
+              onChanged: onChanged,
+              color: color,
+              tooltipColor: tooltipColor,
+              tooltipFormatter: (value) => "${value.toInt()}g",
             ),
           ),
         ],

@@ -37,11 +37,15 @@ dependencies:
   animated_toggle_switch: ^0.8.4
   provider: ^6.0.0
   percent_indicator: ^4.2.3
-  syncfusion_flutter_gauges: ^28.2.7
+  syncfusion_flutter_gauges: ^29.1.33
   material_design_icons_flutter: ^7.0.7296
-  syncfusion_flutter_sliders: ^28.2.7
-  syncfusion_flutter_core: ^28.2.7
-  syncfusion_flutter_charts: ^28.2.7
+  syncfusion_flutter_sliders: ^29.1.33
+  syncfusion_flutter_core: ^29.1.33
+  syncfusion_flutter_charts: ^29.1.33
+  equatable: ^2.0.7
+  flutter_bloc: ^9.1.0
+  awesome_circular_chart: ^1.1.0
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:

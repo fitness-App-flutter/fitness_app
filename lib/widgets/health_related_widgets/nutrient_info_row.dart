@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class NutrientInfoRow extends StatelessWidget {
   final String nutrient;
-  final String grams;
-  final String percent;
+  final double grams;
+  final double percent;
   final Color color;
 
   const NutrientInfoRow({
@@ -32,14 +32,12 @@ class NutrientInfoRow extends StatelessWidget {
           // Bigger colored circle
           CircleAvatar(
             backgroundColor: color,
-            radius: 12,  // Adjust to your desired size
+            radius: 12,
           ),
-
           const SizedBox(width: 12),
 
-          // Nutrient name (left-aligned)
           Expanded(
-            flex: 3,  // Space for nutrient name
+            flex: 3,
             child: Text(
               nutrient,
               style: const TextStyle(
@@ -49,12 +47,11 @@ class NutrientInfoRow extends StatelessWidget {
             ),
           ),
 
-          // Grams (perfectly centered column)
           Expanded(
-            flex: 3,  // Space for grams
+            flex: 3,
             child: Center(
               child: Text(
-                grams,
+                "${grams.toStringAsFixed(1)} g",  // Convert double to string properly
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -63,13 +60,12 @@ class NutrientInfoRow extends StatelessWidget {
             ),
           ),
 
-          // Percentage (right-aligned)
           Expanded(
-            flex: 3,  // Space for percentage
+            flex: 3,
             child: Align(
               alignment: Alignment.centerRight,
               child: Text(
-                percent,
+                "${(percent * 100).toStringAsFixed(1)}%",  // Convert to percentage
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

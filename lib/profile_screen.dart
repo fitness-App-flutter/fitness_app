@@ -7,7 +7,7 @@ import 'package:flutter_projects_1/widgets/profile_related_widgets/info_related_
 import 'package:flutter_projects_1/widgets/profile_related_widgets/profile_toggle_buttons.dart';
 import 'package:flutter_projects_1/widgets/table_widgets/workout_exercise_table.dart';
 import 'package:flutter_projects_1/widgets/password_related_widgets/changing_password.dart';
-
+import 'package:flutter_projects_1/edit_profile_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -19,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: MyColors.white,
         appBar: AppBar(
-          title: const Text(""),
+          title: const Text("Profile"),
           backgroundColor: Colors.white,
           elevation: 0,
           leading: IconButton(
@@ -43,6 +43,7 @@ class ProfileScreen extends StatelessWidget {
                       onPrivacySelected: () => controller.togglePrivacy(true),
                     ),
                     const SizedBox(height: 20),
+
                     controller.isPrivate
                         ? buildPasswordChangeScreenUI(
                       context,
@@ -58,7 +59,12 @@ class ProfileScreen extends StatelessWidget {
                           weight: controller.weight.toString(),
                           height: controller.height.toString(),
                           onEditPressed: () {
-                            print("Edit Profile Clicked");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const EditProfileScreen(),
+                              ),
+                            ).then((_) => controller.reloadProfile()); // Reload after edit
                           },
                         ),
                         const SizedBox(height: 20),

@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_projects_1/color_extension.dart';
 import 'package:flutter_projects_1/widgets/health_related_widgets/submit_meal_button.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_projects_1/color_extension.dart';
+import 'package:flutter_projects_1/widgets/health_related_widgets/nutrient_provider.dart';
 import 'package:flutter_projects_1/widgets/health_related_widgets/nutrient_slider_row.dart';
 
-class AddMealScreen extends StatefulWidget {
+class AddMealScreen extends StatelessWidget {
   const AddMealScreen({super.key});
 
   @override
-  State<AddMealScreen> createState() => _AddMealScreenState();
-}
-
-class _AddMealScreenState extends State<AddMealScreen> {
-  double fat = 0;
-  double protein = 0;
-  double carbs = 0;
-
-  @override
   Widget build(BuildContext context) {
+    final nutrientProvider = Provider.of<NutrientProvider>(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -25,7 +20,7 @@ class _AddMealScreenState extends State<AddMealScreen> {
         title: Text.rich(
           TextSpan(
             text: 'Add Meals of the ',
-            style : TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontWeight: FontWeight.bold),
             children: [
               TextSpan(
                 text: 'DAY',
@@ -43,15 +38,15 @@ class _AddMealScreenState extends State<AddMealScreen> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            // Add extra padding to the first slider
+            // Fat Slider
             Padding(
-              padding: const EdgeInsets.only(top: 25), // Adjust this value as needed
+              padding: const EdgeInsets.only(top: 25),
               child: NutrientSliderRow(
                 nutrient: "Fat",
-                value: fat,
+                value: nutrientProvider.fat,
                 color: MyColors.chart_pink,
-                tooltipColor: MyColors.chart_pink.withOpacity(0.8), // Custom tooltip color
-                onChanged: (v) => setState(() => fat = v),
+                tooltipColor: MyColors.chart_pink.withOpacity(0.8),
+                onChanged: (v) => nutrientProvider.updateNutrient("Fat", v - nutrientProvider.fat),
               ),
             ),
             const SizedBox(height: 16),
@@ -59,28 +54,30 @@ class _AddMealScreenState extends State<AddMealScreen> {
             // Protein Slider
             NutrientSliderRow(
               nutrient: "Protein",
-              value: protein,
+              value: nutrientProvider.protein,
               color: MyColors.chart_orange,
-              tooltipColor: MyColors.chart_orange.withOpacity(0.8), // Custom tooltip color
-              onChanged: (v) => setState(() => protein = v),
+              tooltipColor: MyColors.chart_orange.withOpacity(0.8),
+              onChanged: (v) => nutrientProvider.updateNutrient("Protein", v - nutrientProvider.protein),
             ),
             const SizedBox(height: 16),
 
             // Carbs Slider
             NutrientSliderRow(
               nutrient: "Carbs",
-              value: carbs,
+              value: nutrientProvider.carbs,
               color: MyColors.chart_blue,
-              tooltipColor: MyColors.chart_blue.withOpacity(0.8), // Custom tooltip color
-              onChanged: (v) => setState(() => carbs = v),
+              tooltipColor: MyColors.chart_blue.withOpacity(0.8),
+              onChanged: (v) => nutrientProvider.updateNutrient("Carbs", v - nutrientProvider.carbs),
             ),
 
             const Spacer(),
+
+            // Now passing the total sum as value
             SubmitMealButton(
-              onPressed: () {
-                Navigator.pop(context); // Go back without showing a message
-              },
+              type: "Meal",
+              value: nutrientProvider.fat + nutrientProvider.protein + nutrientProvider.carbs,
             ),
+
             const SizedBox(height: 16),
           ],
         ),
