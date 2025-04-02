@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_projects_1/edit_profile_screen.dart';
+import 'package:flutter_projects_1/widgets/password_related_widgets/changing_password.dart';
+import 'package:flutter_projects_1/widgets/profile_related_widgets/info_related_widgets/profile_info.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_projects_1/color_extension.dart';
 import 'package:flutter_projects_1/widgets/profile_related_widgets/profile_controller.dart';
 import 'package:flutter_projects_1/widgets/profile_related_widgets/profile_avatar.dart';
-import 'package:flutter_projects_1/widgets/profile_related_widgets/info_related_widgets/profile_info.dart';
 import 'package:flutter_projects_1/widgets/profile_related_widgets/profile_toggle_buttons.dart';
 import 'package:flutter_projects_1/widgets/table_widgets/workout_exercise_table.dart';
-import 'package:flutter_projects_1/widgets/password_related_widgets/changing_password.dart';
-import 'package:flutter_projects_1/edit_profile_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -15,7 +15,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => ProfileController(),
+      create: (_) => ProfileController(),  // ProfileController is being provided here
       child: Scaffold(
         backgroundColor: MyColors.white,
         appBar: AppBar(
@@ -43,7 +43,6 @@ class ProfileScreen extends StatelessWidget {
                       onPrivacySelected: () => controller.togglePrivacy(true),
                     ),
                     const SizedBox(height: 20),
-
                     controller.isPrivate
                         ? buildPasswordChangeScreenUI(
                       context,
@@ -53,18 +52,19 @@ class ProfileScreen extends StatelessWidget {
                     )
                         : Column(
                       children: [
+                        // Your profile info widget here
                         ProfileInfo(
                           name: controller.name,
                           email: controller.email,
-                          weight: controller.weight.toString(),
-                          height: controller.height.toString(),
+                          weight: controller.weight.toInt().toString(),
+                          height: controller.height.toInt().toString(),
                           onEditPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const EditProfileScreen(),
                               ),
-                            ).then((_) => controller.reloadProfile()); // Reload after edit
+                            ).then((_) => controller.reloadProfile());  // Reload profile after editing
                           },
                         ),
                         const SizedBox(height: 20),

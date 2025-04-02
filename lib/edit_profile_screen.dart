@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_projects_1/widgets/table_widgets/workout_exercise_table.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_projects_1/color_extension.dart';
 import 'package:flutter_projects_1/widgets/profile_related_widgets/profile_controller.dart';
 import 'package:flutter_projects_1/widgets/profile_related_widgets/profile_avatar.dart';
 import 'package:flutter_projects_1/widgets/profile_related_widgets/profile_toggle_buttons.dart';
-import 'package:flutter_projects_1/widgets/table_widgets/workout_exercise_table.dart';
 import 'package:flutter_projects_1/widgets/profile_related_widgets/edit_related_widgets/edit_text_field.dart';
 import 'package:flutter_projects_1/widgets/health_related_widgets/custom_slider.dart';
 import 'package:flutter_projects_1/widgets/profile_related_widgets/edit_related_widgets/height_selector.dart';
@@ -37,18 +37,18 @@ class EditProfileScreen extends StatelessWidget {
                   Center(child: const ProfileAvatar()),
                   const SizedBox(height: 20),
 
+                  // Privacy Toggle Buttons
                   ProfileToggleButtons(
                     isPrivate: controller.isPrivate,
                     onInfoSelected: () {
-                      controller.togglePrivacy(false);
+                      controller.togglePrivacy(false); // Set privacy to false (Info mode)
                     },
                     onPrivacySelected: () {
-                      controller.togglePrivacy(true);
+                      controller.togglePrivacy(true); // Set privacy to true (Privacy mode)
                     },
                   ),
 
                   const SizedBox(height: 10),
-
 
                   Align(
                     alignment: Alignment.centerRight,
@@ -59,14 +59,16 @@ class EditProfileScreen extends StatelessWidget {
                           email: controller.emailController.text,
                           weight: controller.weight,
                           height: controller.height,
+                          isPrivate: controller.isPrivate,  // Ensure privacy is updated
                         );
-                        Navigator.pop(context); // Return to profile screen after update
+                        Navigator.pop(context);  // Go back to Profile Screen
                       },
                     ),
                   ),
 
-                  const SizedBox(height: 30), // Adjusted spacing
+                  const SizedBox(height: 30),
 
+                  // Profile Information Fields
                   EditTextField(
                     controller: controller.nameController,
                     hintText: "Enter Name",
@@ -79,53 +81,86 @@ class EditProfileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
 
+                  // Weight and Height Selection
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      // Weight slider
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              "Weight",
+                              "Weight (Kg)",
                               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 5),
-                            CustomSlider(
-                              value: controller.weight,
-                              min: 40,
-                              max: 150,
-                              onChanged: (value) => controller.updateWeight(value),
-                              color: MyColors.PrimaryBlue,
-                              tooltipColor: MyColors.PrimaryBlue,
-                            ),
-                            Text(
-                              "${controller.weight.toInt()} Kg",
-                              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: CustomSlider(
+                                    value: controller.weight,
+                                    min: 30,
+                                    max: 250,
+                                    onChanged: (value) => controller.updateWeight(value),
+                                    color: MyColors.PrimaryBlue,
+                                    tooltipColor: MyColors.PrimaryBlue,
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(color: MyColors.PrimaryBlue),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Text(
+                                    "${controller.weight.toInt()} Kg",
+                                    style: TextStyle(
+                                      color: MyColors.PrimaryBlue,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
                       ),
                       const SizedBox(width: 20),
+                      // Height selector
                       Expanded(
-                        child: HeightSelector(
-                          height: controller.height.toInt(),
-                          onIncrease: () {
-                            if (controller.height < 250) {
-                              controller.updateHeight(controller.height + 1);
-                            }
-                          },
-                          onDecrease: () {
-                            if (controller.height > 50) {
-                              controller.updateHeight(controller.height - 1);
-                            }
-                          },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Height (cm)",
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 5),
+                            HeightSelector(
+                              height: controller.height.toInt(),
+                              onIncrease: () {
+                                if (controller.height < 250) {
+                                  controller.updateHeight(controller.height + 1);
+                                }
+                              },
+                              onDecrease: () {
+                                if (controller.height > 50) {
+                                  controller.updateHeight(controller.height - 1);
+                                }
+                              },
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
+
                   const SizedBox(height: 20),
 
+                  // Workout Table (for demo purposes)
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: WorkoutTable(),
