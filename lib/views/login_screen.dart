@@ -20,15 +20,15 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginCubit, LoginStates>(
+    return BlocListener<LoginCubit, LoginState>(
       listener: (BuildContext context, state) {
         if (state is LoginLoading) {
           isLoading = true;
-        } else if (state is LoginSucess) {
+        } else if (state is LoginSuccess) {
           ShowDialog(context, 'Great to see you again');
           isLoading = false;
-        } else if (state is LoginFalier) {
-          showSnackBar(context, state.errorMassage);
+        } else if (state is LoginFailure) {
+          showSnackBar(context, state.error);
           isLoading = false;
         }
       },
@@ -80,7 +80,7 @@ class LoginScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ForgotPasswordScreen()));
+                                  builder: (context) => ForgotPasswordScreen()));
                         },
                         child: const Text("Forgot Password?",
                             style: TextStyle(
@@ -93,8 +93,7 @@ class LoginScreen extends StatelessWidget {
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
                           BlocProvider.of<LoginCubit>(context)
-                              .LoginUser(email: email!, password: password!);
-                          return ShowDialog(context, 'Great to see you again');
+                              .login(email: email!, password: password!);
                         }
                       },
                       backgroundColor: const Color(0xff626ae7),

@@ -1,12 +1,14 @@
 part of 'sign_up_cubit.dart';
 
-abstract class SignUpStates {}
+abstract class SignupState {}
 
-class SignUpLoading extends SignUpStates {}
+class SignupInitial extends SignupState {}
 
-class SignUpSucess extends SignUpStates {}
+class SignupLoading extends SignupState {}
 
-class SignUpFalier extends SignUpStates {
-  String? errorMassage;
-  SignUpFalier({this.errorMassage});
+class SignupSuccess extends SignupState {}
+
+class SignupFailure extends SignupState {
+  final String error;
+  SignupFailure(this.error);
 }
