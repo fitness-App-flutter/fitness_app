@@ -1,11 +1,11 @@
 import 'package:fitness_app/auth/authintication/sign_up_cubit.dart';
 import 'package:fitness_app/core/helper/snack_bar.dart';
 import 'package:fitness_app/views/login_screen.dart';
-import 'package:fitness_app/widgets/custom_button.dart';
-import 'package:fitness_app/widgets/custom_dropdown.dart';
-import 'package:fitness_app/widgets/custom_slider.dart';
-import 'package:fitness_app/widgets/custom_text_field.dart';
-import 'package:fitness_app/widgets/height_selector.dart';
+import 'package:fitness_app/widges/custom_button.dart';
+import 'package:fitness_app/widges/custom_dropdown.dart';
+import 'package:fitness_app/widges/custom_slider.dart';
+import 'package:fitness_app/widges/custom_text_field.dart';
+import 'package:fitness_app/widges/height_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';

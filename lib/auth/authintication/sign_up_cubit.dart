@@ -16,16 +16,14 @@ class SignupCubit extends Cubit<SignupState> {
     required int height,
   }) async {
     try {
-// تسجيل الحساب
+
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email!, password: password!);
 
-// الحصول على UID
       String uid = userCredential.user!.uid;
       print('User UID: ${userCredential.user?.uid}');
       print('Is Signed In: ${FirebaseAuth.instance.currentUser != null}');
 
-// تخزين البيانات في Firestore
       await FirebaseFirestore.instance.collection('users').doc(uid).set({
         'email': email,
         'healthStatus': healthStatus,
@@ -35,11 +33,11 @@ class SignupCubit extends Cubit<SignupState> {
         'createdAt': FieldValue.serverTimestamp(),
       });
 
-      print('تم إنشاء المستخدم وتخزين البيانات ✅');
+      print('User data has been stored ✅');
     } on FirebaseAuthException catch (e) {
-      print('خطأ أثناء التسجيل: ${e.message}');
+      print('SignUp faild: ${e.message}');
     } catch (e) {
-      print('خطأ غير متوقع: $e');
+      print('Unexpected error: $e');
     }
   }
 }

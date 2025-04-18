@@ -1,7 +1,7 @@
 import 'package:fitness_app/core/helper/snack_bar.dart';
-import 'package:fitness_app/widgets/custom_button.dart';
-import 'package:fitness_app/widgets/custom_text_field.dart';
-import 'package:fitness_app/widgets/screen_title.dart';
+import 'package:fitness_app/widges/custom_button.dart';
+import 'package:fitness_app/widges/custom_text_field.dart';
+import 'package:fitness_app/widges/screen_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +20,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             showSnackBar(context, state.message);
           }
           if (state is PasswordChanged) {
-            showSnackBar(context, 'Password was changed seccessfully!');
+            showSnackBar(context, 'Password was changed successfully!');
           }
       },
       builder: (context, state) {

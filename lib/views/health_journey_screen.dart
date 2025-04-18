@@ -1,5 +1,6 @@
-import 'package:fitness_app/widgets/curved_container.dart';
-import 'package:fitness_app/widgets/custom_button.dart';
+
+import 'package:fitness_app/widges/curved_container.dart';
+import 'package:fitness_app/widges/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class HealthJourneyScreen extends StatelessWidget {
