@@ -30,20 +30,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SignUpCubit, SignUpStates>(
+    return BlocConsumer<SignupCubit, SignupState>(
       listener: (BuildContext context, state) {
-        if (state is SignUpLoading) {
+        if (state is SignupLoading) {
           isLoading = false;
-        } else if (state is SignUpSucess) {
+        } else if (state is SignupSuccess) {
           ShowDialog(
               context, 'Welcome to the family!\n Your journey starts now');
           isLoading = false;
-        } else if (state is SignUpFalier) {
-          showSnackBar(context, state.errorMassage);
+        } else if (state is SignupFailure) {
+          showSnackBar(context, state.error);
           isLoading = false;
         }
       },
-      builder: (BuildContext context, SignUpStates state) => ModalProgressHUD(
+      builder: (BuildContext context, SignupState state) => ModalProgressHUD(
         inAsyncCall: isLoading,
         child: Scaffold(
           backgroundColor: Colors.white,
@@ -180,9 +180,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 MaterialPageRoute(
                                     builder: (context) => LoginScreen()));
                             final siginUpEvent =
-                                BlocProvider.of<SignUpCubit>(context);
-                            siginUpEvent.SignupUser(
-                                email: email!, password: password!);
+                                BlocProvider.of<SignupCubit>(context);
+                            siginUpEvent.signUp(
+                                height: height,
+                                healthStatus: selectedHealth!,
+                                target: selectedTarget!,
+                                weight: weight,
+                                email: email!,
+                                password: password!);
                             return ShowDialog(context,
                                 'Welcome to the family!\n Your journey starts now');
                           }

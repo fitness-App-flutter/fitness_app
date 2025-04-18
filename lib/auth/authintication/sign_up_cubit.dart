@@ -1,25 +1,45 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 part 'sign_up_states.dart';
 
-class SignUpCubit extends Cubit<SignUpStates> {
-  SignUpCubit() : super(SignUpLoading());
+class SignupCubit extends Cubit<SignupState> {
+  SignupCubit() : super(SignupInitial());
 
-  Future<void> SignupUser(
-      {required String email, required String password}) async {
-    emit(SignUpLoading());
+  Future<void> signUp({
+     String? email,
+     String? password,
+     String? healthStatus,
+     String? target,
+     double? weight,
+    required int height,
+  }) async {
     try {
-      UserCredential users = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
-      emit(SignUpSucess());
+// تسجيل الحساب
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email!, password: password!);
+
+// الحصول على UID
+      String uid = userCredential.user!.uid;
+      print('User UID: ${userCredential.user?.uid}');
+      print('Is Signed In: ${FirebaseAuth.instance.currentUser != null}');
+
+// تخزين البيانات في Firestore
+      await FirebaseFirestore.instance.collection('users').doc(uid).set({
+        'email': email,
+        'healthStatus': healthStatus,
+        'target': target,
+        'weight': weight,
+        'height': height,
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+
+      print('تم إنشاء المستخدم وتخزين البيانات ✅');
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'email-already-in-use') {
-        emit(SignUpFalier(errorMassage: e.toString()));
-      } else if (e.code == 'weak-password') {
-        emit(SignUpFalier(errorMassage: e.toString()));
-      }
+      print('خطأ أثناء التسجيل: ${e.message}');
     } catch (e) {
-      emit(SignUpFalier(errorMassage: 'someThing went wrong'));
+      print('خطأ غير متوقع: $e');
     }
   }
 }
