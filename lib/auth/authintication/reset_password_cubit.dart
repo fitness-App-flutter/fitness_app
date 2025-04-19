@@ -5,7 +5,6 @@ part 'reset_password_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   String? _email;
-  String? _verificationId;
 
   AuthCubit() : super(AuthInitial());
 
