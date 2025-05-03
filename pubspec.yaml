@@ -14,7 +14,7 @@ dependencies:
   fl_chart: ^0.67.0
   percent_indicator: ^4.2.3
   cupertino_icons: ^1.0.8
-  flutter_bloc: ^9.1.0
+  flutter_bloc: ^9.1.1
   get: ^4.7.2
   firebase_core: ^3.13.0
   firebase_auth: ^5.5.2
@@ -22,6 +22,19 @@ dependencies:
   modal_progress_hud_nsn: ^0.5.1
   pinput: ^5.0.1
   cloud_firestore: ^5.6.6
+  animated_toggle_switch: ^0.8.4
+  provider: ^6.0.0
+  syncfusion_flutter_gauges: ^29.1.33
+  material_design_icons_flutter: ^7.0.7296
+  syncfusion_flutter_sliders: ^29.1.33
+  syncfusion_flutter_core: ^29.1.33
+  syncfusion_flutter_charts: ^29.1.33
+  equatable: ^2.0.7
+  awesome_circular_chart: ^1.1.0
+  shared_preferences: ^2.2.2
+  image_picker: ^1.1.2
+  intl: ^0.19.0
+
 
 dev_dependencies:
   flutter_test:
@@ -34,7 +47,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/profile.jpg
     - assets/images/App_Logo.jpg
     - assets/images/health_icon.jpg
     - assets/images/steps_icon.jpg
@@ -47,7 +59,7 @@ flutter_native_splash:
   ios: true
 
   android_12:
-    color: "#33373A"  # دعم أندرويد 12+
+    color: "#33373A"
     image: assets/images/App_Logo.png
 
 flutter_icons:

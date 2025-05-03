@@ -1,5 +1,6 @@
 import 'package:fitness_app/auth/authintication/sign_up_cubit.dart';
 import 'package:fitness_app/core/helper/snack_bar.dart';
+import 'package:fitness_app/screens/profile_screen.dart';
 import 'package:fitness_app/views/login_screen.dart';
 import 'package:fitness_app/widges/custom_button.dart';
 import 'package:fitness_app/widges/custom_dropdown.dart';
@@ -38,6 +39,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ShowDialog(
               context, 'Welcome to the family!\n Your journey starts now');
           isLoading = false;
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ProfileScreen()),
+          );
+
         } else if (state is SignupFailure) {
           showSnackBar(context, state.error);
           isLoading = false;
