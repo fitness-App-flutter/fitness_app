@@ -39,6 +39,8 @@ flutter:
     - assets/images/health_icon.jpg
     - assets/images/steps_icon.jpg
     - assets/images/workout_icon.jpg
+    - assets/images/runner.jpg
+    - assets/images/shose.png
 
 flutter_native_splash:
   color: "#33373A"

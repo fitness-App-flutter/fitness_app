@@ -5,6 +5,7 @@ import 'package:fitness_app/auth/authintication/reset_password_cubit.dart';
 import 'package:fitness_app/auth/authintication/sign_up_cubit.dart';
 import 'package:fitness_app/firebase_options.dart';
 import 'package:fitness_app/screens/steps_page.dart';
+import 'package:fitness_app/views/health_journey_screen.dart';
 import 'package:fitness_app/views/sign_up_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        home: StepsPage(),
+        home: HealthJourneyScreen(),
       ),
     );
   }
