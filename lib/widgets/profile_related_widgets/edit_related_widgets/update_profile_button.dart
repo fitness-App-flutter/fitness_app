@@ -17,8 +17,9 @@ class UpdateProfileButton extends StatelessWidget {
 
         final String name = controller.nameController.text.trim();
         final String email = controller.emailController.text.trim();
-        final double? weight = double.tryParse(controller.weightController.text.trim());
-        final double? height = double.tryParse(controller.heightController.text.trim());
+        final int? weight = int.tryParse(controller.weightController.text.trim());
+        final int? height = int.tryParse(controller.heightController.text.trim());
+
 
         if (name.isNotEmpty && weight != null && height != null) {
           await controller.updateProfile(

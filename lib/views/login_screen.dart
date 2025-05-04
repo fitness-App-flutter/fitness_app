@@ -1,5 +1,6 @@
 import 'package:fitness_app/auth/authintication/login_cubit.dart';
 import 'package:fitness_app/core/helper/snack_bar.dart';
+import 'package:fitness_app/screens/health_screen.dart';
 import 'package:fitness_app/views/forgot_password_screen.dart';
 import 'package:fitness_app/views/sign_up_screen.dart';
 import 'package:fitness_app/widges/custom_button.dart';
@@ -29,7 +30,7 @@ class LoginScreen extends StatelessWidget {
           isLoading = false;
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => ProfileScreen()),
+            MaterialPageRoute(builder: (context) => HealthScreen()),
           );
         } else if (state is LoginFailure) {
           showSnackBar(context, state.error);

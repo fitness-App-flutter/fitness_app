@@ -5,20 +5,22 @@ import 'package:fitness_app/utils/color_extension.dart';
 
 class SubmitMealButton extends StatelessWidget {
   final String type;
-  final double value;
+  final int value;
+  final String userId;
 
   const SubmitMealButton({
     super.key,
     required this.type,
     required this.value,
+    required this.userId,
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
+      onPressed: () async {
         final nutrientProvider = Provider.of<NutrientProvider>(context, listen: false);
-        nutrientProvider.updateNutrient(type, value); // Now correctly passing type & value
+        await nutrientProvider.updateNutrient(type, value, userId);
 
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -38,10 +40,10 @@ class SubmitMealButton extends StatelessWidget {
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.rice_bowl_outlined, color: Colors.white),
-          const SizedBox(width: 5),
-          const Text(
+        children: const [
+          Icon(Icons.rice_bowl_outlined, color: Colors.white),
+          SizedBox(width: 5),
+          Text(
             "Submit meals",
             style: TextStyle(
               fontWeight: FontWeight.bold,

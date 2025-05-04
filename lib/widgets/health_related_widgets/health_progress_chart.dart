@@ -3,9 +3,9 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:fitness_app/utils/color_extension.dart';
 
 class MultiRingCircularChart extends StatelessWidget {
-  final double fatGrams;
-  final double proteinGrams;
-  final double carbsGrams;
+  final int fatGrams;
+  final int proteinGrams;
+  final int carbsGrams;
   final int totalCalories;
   final int dailyCalorieGoal;
 
@@ -18,15 +18,15 @@ class MultiRingCircularChart extends StatelessWidget {
     required this.dailyCalorieGoal,
   });
 
-  static const double maxFat = 200;
-  static const double maxProtein = 250;
-  static const double maxCarbs = 400;
+  static const int maxFat = 200;
+  static const int maxProtein = 250;
+  static const int maxCarbs = 400;
 
   double get fatProgress => (fatGrams / maxFat).clamp(0.0, 1.0);
   double get proteinProgress => (proteinGrams / maxProtein).clamp(0.0, 1.0);
   double get carbsProgress => (carbsGrams / maxCarbs).clamp(0.0, 1.0);
 
-  double get percentage => (totalCalories / dailyCalorieGoal) * 100;
+  double get percentage => ((totalCalories / dailyCalorieGoal) * 100).clamp(0.0, 999.9);
   bool get exceededGoal => percentage > 100;
 
   @override

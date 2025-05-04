@@ -8,8 +8,8 @@ class ProfileController extends ChangeNotifier {
   bool _isEditing = false;
   String _name = "";
   String _email = "";
-  double _weight = 0.0;
-  double _height = 0.0;
+  int _weight = 0;
+  int _height = 0;
 
   // Controllers
   final TextEditingController nameController = TextEditingController();
@@ -26,8 +26,8 @@ class ProfileController extends ChangeNotifier {
   bool get isEditing => _isEditing;
   String get name => _name;
   String get email => _email;
-  double get weight => _weight;
-  double get height => _height;
+  int get weight => _weight;
+  int get height => _height;
 
   // Constructor
   ProfileController() {
@@ -46,8 +46,8 @@ class ProfileController extends ChangeNotifier {
       final data = doc.data();
       _name = data?['name'] ?? "";
       _email = data?['email'] ?? user.email ?? "";
-      _weight = (data?['weight'] ?? 0.0).toDouble();
-      _height = (data?['height'] ?? 0.0).toDouble();
+      _weight = (data?['weight'] ?? 0).toInt();
+      _height = (data?['height'] ?? 0).toInt();
       _isPrivate = data?['isPrivate'] ?? false;
 
       // Sync controllers
@@ -109,8 +109,8 @@ class ProfileController extends ChangeNotifier {
   Future<void> updateProfile({
     required String name,
     required String email,
-    required double weight,
-    required double height,
+    required int weight,
+    required int height,
     bool? isPrivate,
     String? passwordForReauth,
   }) async {
@@ -151,13 +151,13 @@ class ProfileController extends ChangeNotifier {
   }
 
   // Individual updates
-  void updateWeight(double newWeight) {
+  void updateWeight(int newWeight) {
     _weight = newWeight;
     _updateFirestoreData({'weight': newWeight});
     notifyListeners();
   }
 
-  void updateHeight(double newHeight) {
+  void updateHeight(int newHeight) {
     _height = newHeight;
     _updateFirestoreData({'height': newHeight});
     notifyListeners();

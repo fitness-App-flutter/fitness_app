@@ -10,7 +10,7 @@ import 'package:fitness_app/widges/height_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-
+import 'package:fitness_app/screens/health_screen.dart';
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
@@ -41,7 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           isLoading = false;
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => ProfileScreen()),
+            MaterialPageRoute(builder: (context) => HealthScreen()),
           );
 
         } else if (state is SignupFailure) {
