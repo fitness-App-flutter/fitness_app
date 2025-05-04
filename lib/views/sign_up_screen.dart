@@ -77,7 +77,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
-                    const CustomTextField(hintText: "Enter name"),
+                    CustomTextField(
+                      hintText: "Enter name",
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Name is required";
+                        }
+                        return null;
+                      },
+                    ),
+
                     const SizedBox(height: 20),
 
                     const Text("Email",
@@ -89,7 +98,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       onchange: (data) {
                         email = data;
                       },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Email is required";
+                        }
+                        if (!value.contains('@')) {
+                          return "Enter a valid email";
+                        }
+                        return null;
+                      },
                     ),
+
                     const SizedBox(height: 10),
 
                     const Text("Password",
@@ -97,13 +116,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             fontSize: 16, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
                     CustomTextField(
-                      onchange: (data) {
-                        password = data;
-                      },
                       hintText: "Enter password",
                       obscureText: true,
                       suffixIcon: const Icon(Icons.visibility_off),
+                      onchange: (data) {
+                        password = data;
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Password is required";
+                        }
+                        if (value.length < 6) {
+                          return "Password must be at least 6 characters";
+                        }
+                        return null;
+                      },
                     ),
+
                     const SizedBox(height: 10),
 
                     // Health & Target Dropdowns
@@ -181,6 +210,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         backgroundColor: const Color(0xff626ae7),
                         onPressed: () async {
                           if (formKey.currentState!.validate()) {
+                            if (selectedHealth == null || selectedTarget == null) {
+                              showSnackBar(context, "Please select your health status and target");
+                              return;
+                            }
+                            SignupSuccess();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

@@ -1,11 +1,11 @@
-// TODO Implement this library.import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+
 class CustomTextField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
   final TextEditingController? controller;
   final Function(String)? onchange;
-
+  final String? Function(String?)? validator;
   final Widget? suffixIcon;
 
   const CustomTextField({
@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
     required this.hintText,
     this.obscureText = false,
     this.controller,
+    this.validator,
     this.suffixIcon,
   });
 
@@ -23,6 +24,7 @@ class CustomTextField extends StatelessWidget {
       onChanged: onchange,
       controller: controller,
       obscureText: obscureText,
+      validator: validator,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.grey[400]),
@@ -32,7 +34,7 @@ class CustomTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           borderSide: BorderSide.none,
         ),
-         suffixIcon: suffixIcon,
+        suffixIcon: suffixIcon,
       ),
     );
   }
