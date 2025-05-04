@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fitness_app/utils/color_extension.dart';
+import 'package:fitness_app/core/utils/color_extension.dart';
 import 'package:fitness_app/widgets/health_related_widgets/nutrition_info_section.dart';
 import 'package:provider/provider.dart';
 import 'add_meal_screen.dart';

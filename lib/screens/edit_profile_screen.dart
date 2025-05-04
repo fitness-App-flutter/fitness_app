@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fitness_app/widgets/table_widgets/workout_exercise_table.dart';
 import 'package:provider/provider.dart';
-import 'package:fitness_app/utils/color_extension.dart';
+import 'package:fitness_app/core/utils/color_extension.dart';
 import 'package:fitness_app/widgets/profile_related_widgets/profile_controller.dart';
 import 'package:fitness_app/widgets/profile_related_widgets/profile_avatar.dart';
 import 'package:fitness_app/widgets/profile_related_widgets/profile_toggle_buttons.dart';

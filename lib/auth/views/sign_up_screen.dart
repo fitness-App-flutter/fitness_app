@@ -1,13 +1,12 @@
-import 'package:fitness_app/auth/authintication/sign_up_cubit.dart';
+import 'package:fitness_app/auth/cubit/sign_up_cubit.dart';
+import 'package:fitness_app/auth/views/login_screen.dart';
+import 'package:fitness_app/auth/widges/custom_button.dart';
+import 'package:fitness_app/auth/widges/custom_dropdown.dart';
+import 'package:fitness_app/auth/widges/custom_slider.dart';
+import 'package:fitness_app/auth/widges/custom_text_field.dart';
+import 'package:fitness_app/auth/widges/height_selector.dart';
 import 'package:fitness_app/core/helper/snack_bar.dart';
 import 'package:fitness_app/screens/profile_screen.dart';
-import 'package:fitness_app/utils/color_extension.dart';
-import 'package:fitness_app/views/login_screen.dart';
-import 'package:fitness_app/widges/custom_button.dart';
-import 'package:fitness_app/widges/custom_dropdown.dart';
-import 'package:fitness_app/widges/custom_slider.dart';
-import 'package:fitness_app/widges/custom_text_field.dart';
-import 'package:fitness_app/widges/height_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -78,7 +77,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
-                    const CustomTextField(hintText: "Enter name"),
+                    CustomTextField(
+                      hintText: "Enter name",
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Name is required";
+                        }
+                        return null;
+                      },
+                    ),
+
                     const SizedBox(height: 20),
 
                     const Text("Email",
@@ -90,7 +98,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       onchange: (data) {
                         email = data;
                       },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Email is required";
+                        }
+                        if (!value.contains('@')) {
+                          return "Enter a valid email";
+                        }
+                        return null;
+                      },
                     ),
+
                     const SizedBox(height: 10),
 
                     const Text("Password",
@@ -98,13 +116,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             fontSize: 16, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
                     CustomTextField(
-                      onchange: (data) {
-                        password = data;
-                      },
                       hintText: "Enter password",
                       obscureText: true,
                       suffixIcon: const Icon(Icons.visibility_off),
+                      onchange: (data) {
+                        password = data;
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Password is required";
+                        }
+                        if (value.length < 6) {
+                          return "Password must be at least 6 characters";
+                        }
+                        return null;
+                      },
                     ),
+
                     const SizedBox(height: 10),
 
                     // Health & Target Dropdowns
@@ -179,9 +207,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Center(
                       child: CustomButton(
                         text: "Sign Up",
-                        backgroundColor: MyColors.blue_register,
+                        backgroundColor: const Color(0xff626ae7),
                         onPressed: () async {
                           if (formKey.currentState!.validate()) {
+                            if (selectedHealth == null || selectedTarget == null) {
+                              showSnackBar(context, "Please select your health status and target");
+                              return;
+                            }
+                            SignupSuccess();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -210,9 +243,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         const Text("Do you have an account?"),
                         TextButton(
                           onPressed: () {},
-                          child:  Text(
+                          child: const Text(
                             "Sign in",
-                            style: TextStyle(color: MyColors.blue_register),
+                            style: TextStyle(color: Color(0xff626ae7)),
                           ),
                         ),
                       ],

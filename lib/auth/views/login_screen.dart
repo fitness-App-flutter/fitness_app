@@ -1,12 +1,10 @@
-import 'package:fitness_app/auth/authintication/login_cubit.dart';
+import 'package:fitness_app/auth/cubit/login_cubit.dart';
+import 'package:fitness_app/auth/views/forgot_password_screen.dart';
+import 'package:fitness_app/auth/views/sign_up_screen.dart';
+import 'package:fitness_app/auth/widges/custom_button.dart';
+import 'package:fitness_app/auth/widges/custom_text_field.dart';
+import 'package:fitness_app/auth/widges/screen_title.dart';
 import 'package:fitness_app/core/helper/snack_bar.dart';
-import 'package:fitness_app/screens/health_screen.dart';
-import 'package:fitness_app/utils/color_extension.dart';
-import 'package:fitness_app/views/forgot_password_screen.dart';
-import 'package:fitness_app/views/sign_up_screen.dart';
-import 'package:fitness_app/widges/custom_button.dart';
-import 'package:fitness_app/widges/custom_text_field.dart';
-import 'package:fitness_app/widges/screen_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -116,9 +114,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   builder: (context) =>
                                       ForgotPasswordScreen()));
                         },
-                        child: Text("Forgot Password?",
+                        child: const Text("Forgot Password?",
                             style:
-                            TextStyle(fontSize: 14, color: MyColors.blue_register)),
+                            TextStyle(fontSize: 14, color: Color(0xff626ae7))),
                       ),
                     ),
 
@@ -136,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           );
                         }
                       },
-                      backgroundColor: MyColors.blue_register,
+                      backgroundColor: const Color(0xff626ae7),
                     ),
 
                     const SizedBox(height: 120),
@@ -155,9 +153,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     builder: (context) =>
                                     const SignUpScreen()));
                           },
-                          child: Text("Sign Up",
+                          child: const Text("Sign Up",
                               style: TextStyle(
-                                  fontSize: 14, color: MyColors.blue_register)),
+                                  fontSize: 14, color: Color(0xff626ae7))),
                         ),
                       ],
                     ),
