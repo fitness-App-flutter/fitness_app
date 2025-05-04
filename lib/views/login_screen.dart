@@ -9,31 +9,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:fitness_app/screens/profile_screen.dart';
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
-  late String? email, password;
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
-  late GlobalKey<FormState> formKey = GlobalKey();
+class _LoginScreenState extends State<LoginScreen> {
+  String? email, password;
+  final GlobalKey<FormState> formKey = GlobalKey();
+  bool isLoading = false;
 
-  late bool isLoading = false;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
-      listener: (BuildContext context, state) {
+      listener: (context, state) {
         if (state is LoginLoading) {
-          isLoading = true;
+          setState(() => isLoading = true);
         } else if (state is LoginSuccess) {
+          setState(() => isLoading = false);
           ShowDialog(context, 'Great to see you again');
-          isLoading = false;
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => ProfileScreen()),
           );
         } else if (state is LoginFailure) {
+          setState(() => isLoading = false);
           showSnackBar(context, state.error);
-          isLoading = false;
         }
       },
       child: ModalProgressHUD(
@@ -46,37 +52,58 @@ class LoginScreen extends StatelessWidget {
               child: Form(
                 key: formKey,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 40),
                     const Center(child: ScreenTitle(title: "Welcome Back")),
                     const SizedBox(height: 80),
+
+                    // Email
                     const Text("Email",
-                        style:
-                            TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
                     CustomTextField(
-                      controller: TextEditingController(),
                       hintText: "Enter your email",
-                      onchange: (data) {
-                        email = data;
+                      controller: emailController,
+                      onchange: (data) => email = data,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Email is required";
+                        }
+                        if (!value.contains('@') || !value.contains('.')) {
+                          return "Enter a valid email";
+                        }
+                        return null;
                       },
                     ),
+
                     const SizedBox(height: 20),
+
+                    // Password
                     const Text("Password",
-                        style:
-                            TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
                     CustomTextField(
                       hintText: "Enter your password",
                       obscureText: true,
-                       controller: TextEditingController(),
-                      onchange: (data) {
-                        password = data;
+                      controller: passwordController,
+                      onchange: (data) => password = data,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Password is required";
+                        }
+                        if (value.length < 6) {
+                          return "Password must be at least 6 characters";
+                        }
+                        return null;
                       },
                     ),
+
                     const SizedBox(height: 10),
+
+                    // Forgot Password
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
@@ -84,25 +111,35 @@ class LoginScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ForgotPasswordScreen()));
+                                  builder: (context) =>
+                                      ForgotPasswordScreen()));
                         },
                         child: const Text("Forgot Password?",
-                            style: TextStyle(
-                                fontSize: 14, color: Color(0xff626ae7))),
+                            style:
+                            TextStyle(fontSize: 14, color: Color(0xff626ae7))),
                       ),
                     ),
+
                     const SizedBox(height: 20),
+
+                    // Login Button
                     CustomButton(
                       text: "Login",
-                      onPressed: () async {
+                      onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          BlocProvider.of<LoginCubit>(context)
-                              .login(email: email!, password: password!);
+                          setState(() => isLoading = true);
+                          BlocProvider.of<LoginCubit>(context).login(
+                            email: emailController.text.trim(),
+                            password: passwordController.text.trim(),
+                          );
                         }
                       },
                       backgroundColor: const Color(0xff626ae7),
                     ),
+
                     const SizedBox(height: 120),
+
+                    // Sign up link
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -113,7 +150,8 @@ class LoginScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const SignUpScreen()));
+                                    builder: (context) =>
+                                    const SignUpScreen()));
                           },
                           child: const Text("Sign Up",
                               style: TextStyle(
