@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
           isLoading = false;
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => HealthScreen()),
+            MaterialPageRoute(builder: (context) => ProfileScreen()),
           );
         } else if (state is LoginFailure) {
           showSnackBar(context, state.error);

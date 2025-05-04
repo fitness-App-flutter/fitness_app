@@ -34,6 +34,7 @@ dependencies:
   shared_preferences: ^2.2.2
   image_picker: ^1.1.2
   intl: ^0.19.0
+  file: ^7.0.1
 
 
 dev_dependencies:
@@ -51,6 +52,9 @@ flutter:
     - assets/images/health_icon.jpg
     - assets/images/steps_icon.jpg
     - assets/images/workout_icon.jpg
+    - assets/images/runner.jpg
+    - assets/images/shose.png
+    - assets/images/profile.jpg
 
 flutter_native_splash:
   color: "#33373A"

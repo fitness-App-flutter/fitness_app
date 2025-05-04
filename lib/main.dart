@@ -9,15 +9,14 @@ import 'package:fitness_app/screens/profile_screen.dart';
 import 'package:fitness_app/screens/steps_page.dart';
 import 'package:fitness_app/views/sign_up_screen.dart';
 import 'package:fitness_app/widgets/health_related_widgets/nutrient_provider.dart';
+import 'package:fitness_app/widgets/profile_related_widgets/info_related_widgets/profile_image_cubit/image_cubit.dart';
 import 'package:fitness_app/widgets/profile_related_widgets/profile_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
-import 'package:fitness_app/screens/health_screen.dart';
-
-
+import 'package:fitness_app/widgets/password_related_widgets/visibility_controller.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -29,15 +28,15 @@ void main() async {
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,  // Enable DevicePreview only in development mode
-      builder: (context) => MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => ProfileController()),
-          ChangeNotifierProvider(create: (_) => NutrientProvider()),
-        ],
-        child: const MyApp(),
-      ),
-
-    )
+        builder: (context) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => ProfileController()),
+            ChangeNotifierProvider(create: (_) => VisibilityController()),
+            ChangeNotifierProvider(create: (_) => NutrientProvider())
+          ],
+          child: const MyApp(),
+      )
+    ),
   );
 }
 
@@ -55,27 +54,18 @@ class MyApp extends StatelessWidget {
           create: (context) => SignupCubit(),
         ),
         BlocProvider(create: (context) => AuthCubit()),
+        BlocProvider(create: (context) => ProfileCubit())
       ],
       child: GetMaterialApp(
         useInheritedMediaQuery: true,
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        home: _getInitialScreen(),  // Determine the initial screen based on login state
+        home: SignUpScreen(), // Determine the initial screen based on login state
       ),
     );
   }
 
   // This method checks if the user is logged in, if yes, show ProfileScreen, else show SignUpScreen
-  Widget _getInitialScreen() {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      // If user is logged in, show the ProfileScreen
-      return HealthScreen();
-    } else {
-      // If user is not logged in, show the SignUpScreen
-      return SignUpScreen();
-    }
-  }
-}
 
+}
