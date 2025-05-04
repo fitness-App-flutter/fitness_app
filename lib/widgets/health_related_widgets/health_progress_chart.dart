@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:fitness_app/utils/color_extension.dart';
+import 'package:fitness_app/core/utils/color_extension.dart';
 
 class MultiRingCircularChart extends StatelessWidget {
   final double fatGrams;

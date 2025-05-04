@@ -1,13 +1,11 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:fitness_app/auth/authintication/login_cubit.dart';
-import 'package:fitness_app/auth/authintication/reset_password_cubit.dart';
-import 'package:fitness_app/auth/authintication/sign_up_cubit.dart';
+import 'package:fitness_app/auth/cubit/login_cubit.dart';
+import 'package:fitness_app/auth/cubit/reset_password_cubit.dart';
+import 'package:fitness_app/auth/cubit/sign_up_cubit.dart';
 import 'package:fitness_app/firebase_options.dart';
 import 'package:fitness_app/screens/profile_screen.dart';
-import 'package:fitness_app/screens/steps_page.dart';
-import 'package:fitness_app/views/sign_up_screen.dart';
 import 'package:fitness_app/widgets/profile_related_widgets/info_related_widgets/profile_image_cubit/image_cubit.dart';
 import 'package:fitness_app/widgets/profile_related_widgets/profile_controller.dart';
 import 'package:flutter/foundation.dart';
@@ -15,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
+
+import 'auth/views/sign_up_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,4 +1,4 @@
-import 'package:fitness_app/widges/custom_button.dart';
+import 'package:fitness_app/auth/widges/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 

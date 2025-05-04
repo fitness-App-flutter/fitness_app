@@ -1,10 +1,10 @@
-import 'package:fitness_app/auth/authintication/login_cubit.dart';
+import 'package:fitness_app/auth/cubit/login_cubit.dart';
+import 'package:fitness_app/auth/views/forgot_password_screen.dart';
+import 'package:fitness_app/auth/views/sign_up_screen.dart';
+import 'package:fitness_app/auth/widges/custom_button.dart';
+import 'package:fitness_app/auth/widges/custom_text_field.dart';
+import 'package:fitness_app/auth/widges/screen_title.dart';
 import 'package:fitness_app/core/helper/snack_bar.dart';
-import 'package:fitness_app/views/forgot_password_screen.dart';
-import 'package:fitness_app/views/sign_up_screen.dart';
-import 'package:fitness_app/widges/custom_button.dart';
-import 'package:fitness_app/widges/custom_text_field.dart';
-import 'package:fitness_app/widges/screen_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';

@@ -1,6 +1,6 @@
-import 'package:fitness_app/widges/custom_button.dart';
-import 'package:fitness_app/widges/custom_text_field.dart';
-import 'package:fitness_app/widges/screen_title.dart';
+import 'package:fitness_app/auth/widges/custom_button.dart';
+import 'package:fitness_app/auth/widges/custom_text_field.dart';
+import 'package:fitness_app/auth/widges/screen_title.dart';
 import 'package:flutter/material.dart';
 class ResetPasswordScreen extends StatelessWidget {
   const ResetPasswordScreen({super.key});

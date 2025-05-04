@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fitness_app/utils/color_extension.dart';
+import 'package:fitness_app/core/utils/color_extension.dart';
 
 class EditProfileButton extends StatelessWidget {
   final VoidCallback onPressed;
