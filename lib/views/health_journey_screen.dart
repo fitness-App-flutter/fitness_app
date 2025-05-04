@@ -1,4 +1,5 @@
 
+import 'package:fitness_app/views/sign_up_screen.dart';
 import 'package:fitness_app/widges/curved_container.dart';
 import 'package:fitness_app/widges/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,10 @@ class HealthJourneyScreen extends StatelessWidget {
                   CustomButton(
                     text: "Continue",
                     onPressed: () {
-
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SignUpScreen()));
                     },
                   ),
                 ],
