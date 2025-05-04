@@ -1,24 +1,36 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness_app/auth/authintication/login_cubit.dart';
 import 'package:fitness_app/auth/authintication/reset_password_cubit.dart';
 import 'package:fitness_app/auth/authintication/sign_up_cubit.dart';
 import 'package:fitness_app/firebase_options.dart';
-import 'package:fitness_app/views/health_journey_screen.dart';
+import 'package:fitness_app/screens/profile_screen.dart';
+import 'package:fitness_app/screens/steps_page.dart';
+import 'package:fitness_app/views/sign_up_screen.dart';
+import 'package:fitness_app/widgets/profile_related_widgets/info_related_widgets/profile_image_cubit/image_cubit.dart';
+import 'package:fitness_app/widgets/profile_related_widgets/profile_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(
+
+  // Ensure Firebase is initialized before running the app
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(
     DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => const MyApp(),
+      enabled: !kReleaseMode,  // Enable DevicePreview only in development mode
+      builder: (context) => ChangeNotifierProvider(
+        create: (_) => ProfileController(),
+        child: const MyApp(),
+      )
     ),
   );
 }
@@ -26,7 +38,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -38,14 +49,28 @@ class MyApp extends StatelessWidget {
           create: (context) => SignupCubit(),
         ),
         BlocProvider(create: (context) => AuthCubit()),
+        BlocProvider(create: (context) => ProfileCubit())
       ],
       child: GetMaterialApp(
         useInheritedMediaQuery: true,
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        home: const HealthJourneyScreen(),
+        home: _getInitialScreen(),  // Determine the initial screen based on login state
       ),
     );
   }
+
+  // This method checks if the user is logged in, if yes, show ProfileScreen, else show SignUpScreen
+  Widget _getInitialScreen() {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      // If user is logged in, show the ProfileScreen
+      return ProfileScreen();
+    } else {
+      // If user is not logged in, show the SignUpScreen
+      return SignUpScreen();
+    }
+  }
 }
+

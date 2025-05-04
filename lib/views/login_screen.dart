@@ -8,7 +8,7 @@ import 'package:fitness_app/widges/screen_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-
+import 'package:fitness_app/screens/profile_screen.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
@@ -27,6 +27,10 @@ class LoginScreen extends StatelessWidget {
         } else if (state is LoginSuccess) {
           ShowDialog(context, 'Great to see you again');
           isLoading = false;
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ProfileScreen()),
+          );
         } else if (state is LoginFailure) {
           showSnackBar(context, state.error);
           isLoading = false;
