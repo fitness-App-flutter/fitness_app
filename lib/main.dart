@@ -4,18 +4,20 @@ import 'package:fitness_app/auth/authintication/login_cubit.dart';
 import 'package:fitness_app/auth/authintication/reset_password_cubit.dart';
 import 'package:fitness_app/auth/authintication/sign_up_cubit.dart';
 import 'package:fitness_app/firebase_options.dart';
+import 'package:fitness_app/screens/overview_page.dart';
+import 'package:fitness_app/screens/sleep_page.dart';
 import 'package:fitness_app/screens/steps_page.dart';
+import 'package:fitness_app/utils/notifications_logic.dart';
 import 'package:fitness_app/views/sign_up_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await initNotifications();
+  await requestNotificationPermission();
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
