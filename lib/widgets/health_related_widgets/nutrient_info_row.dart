@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class NutrientInfoRow extends StatelessWidget {
   final String nutrient;
-  final double grams;
-  final double percent;
+  final int grams;
+  final int percent;
   final Color color;
 
   const NutrientInfoRow({
@@ -51,7 +51,7 @@ class NutrientInfoRow extends StatelessWidget {
             flex: 3,
             child: Center(
               child: Text(
-                "${grams.toStringAsFixed(1)} g",  // Convert double to string properly
+                "${grams.toStringAsFixed(1)} g",
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

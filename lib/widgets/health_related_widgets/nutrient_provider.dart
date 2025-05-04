@@ -1,71 +1,84 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NutrientProvider with ChangeNotifier {
-  double _fat = 0;
-  double _protein = 0;
-  double _carbs = 0;
-  DateTime? _lastResetTime;
+  int _fat = 0;
+  int _protein = 0;
+  int _carbs = 0;
 
-  double get fat => _fat;
-  double get protein => _protein;
-  double get carbs => _carbs;
-  double get totalCalories => (_fat * 9) + (_protein * 4) + (_carbs * 4);
+  int get fat => _fat;
+  int get protein => _protein;
+  int get carbs => _carbs;
+  int get totalCalories => (_fat * 9) + (_protein * 4) + (_carbs * 4);
 
-  NutrientProvider() {
-    _loadData();
-  }
+  Future<void> loadData(String userId) async {
+    final docId = _getTodayId();
+    final docRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('calories')
+        .doc(docId);
 
-  Future<void> _loadData() async {
-    final prefs = await SharedPreferences.getInstance();
-    _fat = prefs.getDouble('fat') ?? 0;
-    _protein = prefs.getDouble('protein') ?? 0;
-    _carbs = prefs.getDouble('carbs') ?? 0;
-
-    final lastReset = prefs.getString('lastResetTime');
-    if (lastReset != null) {
-      _lastResetTime = DateTime.tryParse(lastReset);
-      _checkReset();
+    final doc = await docRef.get();
+    if (doc.exists) {
+      final data = doc.data()!;
+      _fat = (data['fat'] ?? 0).toInt();
+      _protein = (data['protein'] ?? 0).toInt();
+      _carbs = (data['carbs'] ?? 0).toInt();
+    } else {
+      _fat = 0;
+      _protein = 0;
+      _carbs = 0;
     }
 
     notifyListeners();
   }
 
-  void _checkReset() {
-    final now = DateTime.now();
-    if (_lastResetTime == null || now.difference(_lastResetTime!) >= const Duration(hours: 24)) {
-      resetValues();
-    }
-  }
+  Future<void> updateNutrient(String type, int value, String userId) async {
+    final int intValue = value.round(); // or use .toInt() or .floor()
+    if (type == "Fat") _fat = (_fat + intValue).clamp(0, double.infinity).toInt();
+    if (type == "Protein") _protein = (_protein + intValue).clamp(0, double.infinity).toInt();
+    if (type == "Carbs") _carbs = (_carbs + intValue).clamp(0, double.infinity).toInt();
 
-  Future<void> saveData() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setDouble('fat', _fat);
-    await prefs.setDouble('protein', _protein);
-    await prefs.setDouble('carbs', _carbs);
-    if (_lastResetTime != null) {
-      await prefs.setString('lastResetTime', _lastResetTime!.toIso8601String());
-    }
+    await _saveToFirestore(userId);
     notifyListeners();
   }
 
-  void updateNutrient(String type, double value) {
-    if (type == "Fat") _fat = (_fat + value).clamp(0.0, double.infinity);
-    if (type == "Protein") _protein = (_protein + value).clamp(0.0, double.infinity);
-    if (type == "Carbs") _carbs = (_carbs + value).clamp(0.0, double.infinity);
-
-    saveData();
-    notifyListeners();
-  }
-
-  Future<void> resetValues() async {
+  Future<void> resetValues(String userId) async {
     _fat = 0;
     _protein = 0;
     _carbs = 0;
-    _lastResetTime = DateTime.now();
 
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('lastResetTime', _lastResetTime!.toIso8601String());
-    await saveData();
+    await _saveToFirestore(userId);
+    notifyListeners();
+  }
+
+  Future<void> _saveToFirestore(String userId) async {
+    final docId = _getTodayId();
+    print("📝 Trying to save for userId: $userId on $docId");
+    print("Saving values → Fat: $_fat, Protein: $_protein, Carbs: $_carbs, Calories: $totalCalories");
+
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .collection('calories')
+          .doc(docId)
+          .set({
+        'fat': _fat,
+        'protein': _protein,
+        'carbs': _carbs,
+        'totalCalories': totalCalories,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+      print('✅ Firestore: Save successful');
+    } catch (e) {
+      print('❌ Firestore: Save failed → $e');
+    }
+  }
+
+  String _getTodayId() {
+    final now = DateTime.now();
+    return "${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
   }
 }

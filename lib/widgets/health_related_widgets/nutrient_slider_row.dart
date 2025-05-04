@@ -3,8 +3,8 @@ import 'custom_slider.dart';
 
 class NutrientSliderRow extends StatelessWidget {
   final String nutrient;
-  final double value;
-  final ValueChanged<double> onChanged;
+  final int value;
+  final ValueChanged<int> onChanged;
   final Color color;
   final Color tooltipColor;
 
@@ -18,16 +18,16 @@ class NutrientSliderRow extends StatelessWidget {
   });
 
   // Set different max values based on nutrient type
-  double get maxValue {
+  int get maxValue {
     switch (nutrient.toLowerCase()) {
       case "fat":
-        return 150.0;
+        return 150;
       case "protein":
-        return 250.0;
+        return 250;
       case "carbs":
-        return 400.0;
+        return 400;
       default:
-        return 100.0; // Default fallback
+        return 100; // Default fallback
     }
   }
 
@@ -70,11 +70,11 @@ class NutrientSliderRow extends StatelessWidget {
           ),
           const SizedBox(width: 16),
 
-          // Custom Slider with adjusted max values
+
           Expanded(
             child: CustomSlider(
               value: value,
-              min: 0.0,
+              min: 0,
               max: maxValue,
               onChanged: onChanged,
               color: color,
