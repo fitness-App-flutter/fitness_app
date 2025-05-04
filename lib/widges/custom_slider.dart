@@ -1,3 +1,4 @@
+import 'package:fitness_app/utils/color_extension.dart';
 import 'package:flutter/material.dart';
 
 class CustomSlider extends StatelessWidget {
@@ -27,7 +28,7 @@ class CustomSlider extends StatelessWidget {
         SizedBox(
           width: 180, // Adjust width for better UI
           child: Slider(
-            activeColor: const Color(0xff626ae7),
+            activeColor: MyColors.blue_register,
             value: value,
             min: min,
             max: max,

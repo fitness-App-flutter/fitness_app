@@ -10,6 +10,7 @@ class SignupCubit extends Cubit<SignupState> {
   Future<void> signUp({
      String? email,
      String? password,
+     String? name,
      String? healthStatus,
      String? target,
      double? weight,
@@ -26,6 +27,7 @@ class SignupCubit extends Cubit<SignupState> {
 
       await FirebaseFirestore.instance.collection('users').doc(uid).set({
         'email': email,
+        'name' :name,
         'healthStatus': healthStatus,
         'target': target,
         'weight': weight,

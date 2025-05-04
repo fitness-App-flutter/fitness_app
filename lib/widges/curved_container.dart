@@ -1,3 +1,4 @@
+import 'package:fitness_app/utils/color_extension.dart';
 import 'package:flutter/material.dart';
 
 class CurvedContainer extends StatelessWidget {
@@ -18,7 +19,7 @@ class CurvedContainer extends StatelessWidget {
         clipper: CurvedClipper(),
         child: Container(
           height: MediaQuery.of(context).size.height * heightFactor,
-          color: const Color(0xff626ae7),
+          color: MyColors.blue_register,
           padding: const EdgeInsets.only(left: 20,right: 20,top: 60),
           child: child,
         ),

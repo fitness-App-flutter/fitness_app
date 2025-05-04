@@ -1,4 +1,5 @@
 
+import 'package:fitness_app/utils/color_extension.dart';
 import 'package:fitness_app/views/sign_up_screen.dart';
 import 'package:fitness_app/widges/curved_container.dart';
 import 'package:fitness_app/widges/custom_button.dart';
@@ -42,7 +43,7 @@ class HealthJourneyScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
-                      color: Colors.grey[300],
+                      color: MyColors.grey_300,
                     ),
                   ),
                   const SizedBox(height: 20),

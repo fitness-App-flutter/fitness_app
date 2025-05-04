@@ -1,3 +1,4 @@
+import 'package:fitness_app/utils/color_extension.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -18,7 +19,7 @@ class CustomButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xff626ae7),
+          backgroundColor: MyColors.blue_register,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
@@ -26,7 +27,7 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           text,
-          style: TextStyle(color: Colors.grey[200], fontSize: 16),
+          style: TextStyle(color: MyColors.grey_200, fontSize: 16),
         ),
       ),
     );

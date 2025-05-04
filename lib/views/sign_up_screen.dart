@@ -1,6 +1,7 @@
 import 'package:fitness_app/auth/authintication/sign_up_cubit.dart';
 import 'package:fitness_app/core/helper/snack_bar.dart';
 import 'package:fitness_app/screens/profile_screen.dart';
+import 'package:fitness_app/utils/color_extension.dart';
 import 'package:fitness_app/views/login_screen.dart';
 import 'package:fitness_app/widges/custom_button.dart';
 import 'package:fitness_app/widges/custom_dropdown.dart';
@@ -10,15 +11,12 @@ import 'package:fitness_app/widges/height_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:fitness_app/screens/health_screen.dart';
-import 'package:fitness_app/widgets/password_related_widgets/visibility_controller.dart';
-import 'package:provider/provider.dart';
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
-
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
@@ -44,7 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           isLoading = false;
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => LoginScreen()),
+            MaterialPageRoute(builder: (context) => ProfileScreen()),
           );
 
         } else if (state is SignupFailure) {
@@ -104,20 +102,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         password = data;
                       },
                       hintText: "Enter password",
-                      obscureText: !Provider.of<VisibilityController>(context).isVisible,
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          Provider.of<VisibilityController>(context).isVisible
-                              ? Icons.visibility_outlined
-                              : Icons.visibility_off_outlined,
-                          color: const Color(0xff565e6c),
-                        ),
-                        onPressed: () {
-                          Provider.of<VisibilityController>(context, listen: false).toggleVisibility();
-                        },
-                      ),
+                      obscureText: true,
+                      suffixIcon: const Icon(Icons.visibility_off),
                     ),
-
                     const SizedBox(height: 10),
 
                     // Health & Target Dropdowns
@@ -192,7 +179,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Center(
                       child: CustomButton(
                         text: "Sign Up",
-                        backgroundColor: const Color(0xff626ae7),
+                        backgroundColor: MyColors.blue_register,
                         onPressed: () async {
                           if (formKey.currentState!.validate()) {
                             Navigator.push(
@@ -223,9 +210,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         const Text("Do you have an account?"),
                         TextButton(
                           onPressed: () {},
-                          child: const Text(
+                          child:  Text(
                             "Sign in",
-                            style: TextStyle(color: Color(0xff626ae7)),
+                            style: TextStyle(color: MyColors.blue_register),
                           ),
                         ),
                       ],

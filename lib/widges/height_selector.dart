@@ -1,3 +1,4 @@
+import 'package:fitness_app/utils/color_extension.dart';
 import 'package:flutter/material.dart';
 
 class HeightSelector extends StatelessWidget {
@@ -32,7 +33,7 @@ class HeightSelector extends StatelessWidget {
               Text(height.toString(),
                   style: const TextStyle(fontSize: 18)),
               Card(
-                color: Colors.grey[200],
+                color: MyColors.grey_200,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 child: IconButton(
                   onPressed: onDecrease,
@@ -43,7 +44,7 @@ class HeightSelector extends StatelessWidget {
                 ),
               ),
               Card(
-                color: const Color(0xff626ae7),
+                color: MyColors.blue_register,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 child: IconButton(
                   onPressed: onIncrease,

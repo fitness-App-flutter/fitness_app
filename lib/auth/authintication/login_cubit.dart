@@ -17,8 +17,11 @@ class LoginCubit extends Cubit<LoginState> {
         password: password,
       );
       emit(LoginSuccess());
+    } on FirebaseAuthException catch (e) {
+      emit(LoginFailure(e.message ?? 'Something went wrong'));
     } catch (e) {
-      emit(LoginFailure(e.toString()));
+      emit(LoginFailure('Unexpected error: ${e.toString()}'));
     }
+
   }
 }
