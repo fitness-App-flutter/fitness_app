@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fitness_app/widgets/health_related_widgets/nutrient_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:fitness_app/utils/color_extension.dart';
+import 'package:fitness_app/core/utils/color_extension.dart';
 
 class SubmitMealButton extends StatelessWidget {
   final String type;
