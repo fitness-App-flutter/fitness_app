@@ -1,4 +1,4 @@
-import 'package:fitness_app/utils/step_counter_logic.dart';
+import 'package:fitness_app/core//utils/step_counter_logic.dart';
 import 'package:fitness_app/widgets/StepsWidgets/steps_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';

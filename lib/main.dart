@@ -1,23 +1,21 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:fitness_app/auth/authintication/login_cubit.dart';
-import 'package:fitness_app/auth/authintication/reset_password_cubit.dart';
-import 'package:fitness_app/auth/authintication/sign_up_cubit.dart';
+import 'package:fitness_app/auth/cubit//login_cubit.dart';
+import 'package:fitness_app/auth/cubit//reset_password_cubit.dart';
+import 'package:fitness_app/auth/cubit//sign_up_cubit.dart';
 import 'package:fitness_app/firebase_options.dart';
-import 'package:fitness_app/screens/overview_page.dart';
-import 'package:fitness_app/screens/sleep_page.dart';
 import 'package:fitness_app/screens/steps_page.dart';
-import 'package:fitness_app/utils/notifications_logic.dart';
-import 'package:fitness_app/views/sign_up_screen.dart';
+import 'package:fitness_app/auth//views/sign_up_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  await initNotifications();
-  await requestNotificationPermission();
+  Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
@@ -29,7 +27,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
