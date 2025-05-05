@@ -23,7 +23,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String? selectedTarget;
   double weight = 50;
   int height = 170;
-  String? email, password;
+  String? email, password,name;
 
   GlobalKey<FormState> formKey = GlobalKey();
 
@@ -227,6 +227,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 target: selectedTarget!,
                                 weight: weight,
                                 email: email!,
+                                name: name,
                                 password: password!);
                             return ShowDialog(context,
                                 'Welcome to the family!\n Your journey starts now');

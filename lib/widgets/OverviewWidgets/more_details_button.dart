@@ -38,14 +38,14 @@ class MoreDetailsButton extends StatelessWidget {
                   size: 24, // حجم الأيقونة
                 ),
                 Icon(
-                  Icons.arrow_forward_ios, // أيقونة السهم (>)
-                  color: Color(0xffb491f8), // اللون الثاني
+                  Icons.arrow_forward_ios,
+                  color: Color(0xffb491f8),
                   size: 24, // حجم الأيقونة
                 ),
                 Icon(
-                  Icons.arrow_forward_ios, // أيقونة السهم (>)
-                  color: Color(0xffe1c9ff), // اللون الثالث
-                  size: 24, // حجم الأيقونة
+                  Icons.arrow_forward_ios,
+                  color: Color(0xffe1c9ff),
+                  size: 24,
                 ),
               ],
             ),
