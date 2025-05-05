@@ -1,42 +1,95 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-class StepsProgress extends StatelessWidget {
-  const StepsProgress({super.key});
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+FlutterLocalNotificationsPlugin();
+
+Future<void> showGoalNotification() async {
+  const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+    'goal_channel',
+    'Goal Notifications',
+    importance: Importance.max,
+    priority: Priority.high,
+  );
+
+  const NotificationDetails notificationDetails = NotificationDetails(
+    android: androidDetails,
+  );
+
+  await flutterLocalNotificationsPlugin.show(
+    0,
+    '🎉 Congratulations!',
+    'You have reached your steps goal!',
+    notificationDetails,
+  );
+}
+
+class StepsProgress extends StatefulWidget {
+  final int steps;
+  final int goal;
+
+  const StepsProgress({
+    super.key,
+    required this.steps,
+    this.goal = 18000,
+  });
+
+  @override
+  State<StepsProgress> createState() => _StepsProgressState();
+}
+
+class _StepsProgressState extends State<StepsProgress> {
+  bool hasNotified = false;
+
+  @override
+  void didUpdateWidget(covariant StepsProgress oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (!hasNotified && widget.steps >= widget.goal) {
+      hasNotified = true;
+      showGoalNotification();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _buildCircularChart(13857, 18000),
-      ],
-    );
+    return _buildCircularChart(widget.steps, widget.goal);
   }
 
   Widget _buildCircularChart(int steps, int goal) {
-    double progress = steps / goal;
+    final int displayedSteps = steps;
+    double progress = (displayedSteps / goal).clamp(0.0, 1.0);
+
     return SizedBox(
-      width: 160,
-      height: 120,
+      width: 200,
+      height: 200,
       child: CustomPaint(
         painter: CircularChartPainter(progress),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
-                Icons.directions_walk, // Use any icon you prefer
-                size: 30, // Adjust the size of the icon
-                color:Color(0xFF636AE8), // Adjust the color of the icon
+              Icon(
+                Icons.directions_walk,
+                size: 30,
+                color: const Color(0xFF636AE8),
               ),
-              const SizedBox(height: 8), // Add spacing between the icon and text
+              const SizedBox(height: 8),
               Text(
-                "$steps",
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                "$displayedSteps",
+                style: const TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
               ),
-              const SizedBox(height: 4), // Add spacing between the icon and text
-              const Text(
-                "Steps Out Of 18K",
-                style: TextStyle(fontSize: 12,color: Colors.grey),
+              const SizedBox(height: 4),
+              Text(
+                "Goal: $goal",
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey,
+                ),
               ),
             ],
           ),
@@ -59,7 +112,6 @@ class CircularChartPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
-
     final Paint progressPaint = Paint()
       ..color = const Color(0xFF636AE8)
       ..strokeWidth = 15
@@ -67,22 +119,20 @@ class CircularChartPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
 
     final center = Offset(size.width / 2, size.height / 2);
-    final radius = size.width / 2 - 5;
+    final radius = size.width / 2 - 15;
 
-    // Draw the background circle (with a gap at the bottom)
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),
-      3.14159 * 0.75, // Start angle (top-left)
-      3.14159 * 1.5, // Sweep angle (270 degrees, leaving a gap at the bottom)
+      3.14159 * 0.75,
+      3.14159 * 1.5,
       false,
       backgroundPaint,
     );
 
-    // Draw the progress arc (with a gap at the bottom)
-    final sweepAngle = 3.14159 * 1.5 * progress; // Progress based on 270 degrees
+    final sweepAngle = 3.14159 * 1.5 * progress;
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),
-      3.14159 * 0.75, // Start angle (top-left)
+      3.14159 * 0.75,
       sweepAngle,
       false,
       progressPaint,
@@ -90,7 +140,5 @@ class CircularChartPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
-  }
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

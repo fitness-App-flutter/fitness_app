@@ -6,6 +6,7 @@ import 'package:fitness_app/auth/widges/custom_slider.dart';
 import 'package:fitness_app/auth/widges/custom_text_field.dart';
 import 'package:fitness_app/auth/widges/height_selector.dart';
 import 'package:fitness_app/core/helper/snack_bar.dart';
+import 'package:fitness_app/screens/overview_page.dart';
 import 'package:fitness_app/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,8 +24,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String? selectedTarget;
   double weight = 50;
   int height = 170;
-  String? email, password,name;
-
+  String? email, password;
+  TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
 
   bool isLoading = false;
@@ -41,7 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           isLoading = false;
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => ProfileScreen()),
+            MaterialPageRoute(builder: (context) => const ProfileScreen()),
           );
 
         } else if (state is SignupFailure) {
@@ -118,7 +119,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     CustomTextField(
                       hintText: "Enter password",
                       obscureText: true,
-                      suffixIcon: const Icon(Icons.visibility_off),
+                      controller: passwordController,
                       onchange: (data) {
                         password = data;
                       },
@@ -218,7 +219,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginScreen()));
+                                    builder: (context) => const OverviewPage()));
                             final siginUpEvent =
                                 BlocProvider.of<SignupCubit>(context);
                             siginUpEvent.signUp(
@@ -227,7 +228,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 target: selectedTarget!,
                                 weight: weight,
                                 email: email!,
-                                name: name,
                                 password: password!);
                             return ShowDialog(context,
                                 'Welcome to the family!\n Your journey starts now');
@@ -243,7 +243,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       children: [
                         const Text("Do you have an account?"),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginScreen()));
+                          },
                           child: const Text(
                             "Sign in",
                             style: TextStyle(color: Color(0xff626ae7)),
