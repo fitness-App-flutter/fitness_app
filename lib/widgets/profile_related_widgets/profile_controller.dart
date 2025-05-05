@@ -10,6 +10,9 @@ class ProfileController extends ChangeNotifier {
   String _email = "";
   int _weight = 0;
   int _height = 0;
+  String? _profileImageUrl;
+  String? get profileImageUrl => _profileImageUrl;
+
 
   // Controllers
   final TextEditingController nameController = TextEditingController();
@@ -49,12 +52,14 @@ class ProfileController extends ChangeNotifier {
       _weight = (data?['weight'] ?? 0).toInt();
       _height = (data?['height'] ?? 0).toInt();
       _isPrivate = data?['isPrivate'] ?? false;
+      _profileImageUrl = data?['profileImageUrl'];
 
       // Sync controllers
       nameController.text = _name;
       emailController.text = _email;
       weightController.text = _weight.toString();
       heightController.text = _height.toString();
+
     } catch (e) {
       print("Error loading profile data: $e");
     }
@@ -72,6 +77,11 @@ class ProfileController extends ChangeNotifier {
     } catch (e) {
       print("Error updating Firestore data: $e");
     }
+  }
+  Future<void> updateProfileImage(String imageUrl) async {
+    _profileImageUrl = imageUrl;
+    await _updateFirestoreData({'profileImageUrl': imageUrl});
+    notifyListeners();
   }
 
   // Reauthentication

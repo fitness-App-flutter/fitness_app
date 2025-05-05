@@ -19,14 +19,13 @@ import 'auth/views/sign_up_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Ensure Firebase is initialized before running the app
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
   runApp(
     DevicePreview(
-        enabled: !kReleaseMode,  // Enable DevicePreview only in development mode
+        enabled: !kReleaseMode,
         builder: (context) => ChangeNotifierProvider(
           create: (_) => ProfileController(),
           child: const MyApp(),

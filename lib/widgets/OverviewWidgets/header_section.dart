@@ -1,8 +1,10 @@
 // widgets/OverviewWidgets/header_section.dart
 
+import 'package:fitness_app/screens/profile_screen.dart';
+import 'package:fitness_app/widgets/profile_related_widgets/profile_controller.dart';
 import 'package:flutter/material.dart';
-import '../../models/date_utils.dart'; // Import date utilities
-
+import 'package:provider/provider.dart';
+import '../../models/date_utils.dart';
 class HeaderSection extends StatelessWidget {
   const HeaderSection({super.key});
 
@@ -20,7 +22,7 @@ class HeaderSection extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Left Side: Icon and Date
+
           Row(
             children: [
               Icon(
@@ -39,11 +41,27 @@ class HeaderSection extends StatelessWidget {
             ],
           ),
           // Right Side: User Avatar
-          CircleAvatar(
-            radius: 22,
-            backgroundColor: Colors.grey[300],
-            backgroundImage: AssetImage('assets/images/profile.jpg')
+          Consumer<ProfileController>(
+            builder: (context, controller, _) {
+              final imageUrl = controller.profileImageUrl;
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const ProfileScreen()),
+                  );
+                },
+                child: CircleAvatar(
+                  radius: 22,
+                  backgroundColor: Colors.grey[300],
+                  backgroundImage: imageUrl != null
+                      ? NetworkImage(imageUrl)
+                      : const AssetImage('assets/images/profile.jpg') as ImageProvider,
+                ),
+              );
+            },
           ),
+
         ],
       ),
     );
