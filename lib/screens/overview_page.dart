@@ -1,37 +1,42 @@
+import 'package:fitness_app/core/utils/step_counter_logic.dart';
 import 'package:flutter/material.dart';
 import '../widgets/OverviewWidgets/header_section.dart';
 import '../widgets/OverviewWidgets/health_overview_card.dart';
 import '../widgets/OverviewWidgets/category_section.dart';
 import '../widgets/OverviewWidgets/report_section.dart';
 import '../widgets/OverviewWidgets/more_details_button.dart';
+import 'package:provider/provider.dart';
+
 
 class OverviewPage extends StatelessWidget {
   const OverviewPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final stepsCount = context.watch<StepCounterLogic>().steps;
+
+    return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HeaderSection(),
-              SizedBox(height: 16),
-              Text(
+              const HeaderSection(),
+              const SizedBox(height: 16),
+              const Text(
                 "Overview",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 16),
-              HealthOverviewCard(),
-              SizedBox(height: 16),
-              CategorySection(),
-              SizedBox(height: 24),
-              ReportSection(),
-              SizedBox(height: 10),
-              MoreDetailsButton(),
+              const SizedBox(height: 16),
+              const HealthOverviewCard(),
+              const SizedBox(height: 16),
+              const CategorySection(),
+              const SizedBox(height: 24),
+              ReportSection(stepsCount: stepsCount),
+              const SizedBox(height: 10),
+              const MoreDetailsButton(),
             ],
           ),
         ),
