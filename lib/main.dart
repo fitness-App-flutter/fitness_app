@@ -25,11 +25,11 @@ void main() async {
 
   runApp(
     DevicePreview(
-      enabled: !kReleaseMode,  // Enable DevicePreview only in development mode
-      builder: (context) => ChangeNotifierProvider(
-        create: (_) => ProfileController(),
-        child: const MyApp(),
-      )
+        enabled: !kReleaseMode,  // Enable DevicePreview only in development mode
+        builder: (context) => ChangeNotifierProvider(
+          create: (_) => ProfileController(),
+          child: const MyApp(),
+        )
     ),
   );
 }
@@ -72,4 +72,3 @@ class MyApp extends StatelessWidget {
     }
   }
 }
-
