@@ -19,16 +19,17 @@ class PasswordService {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) return 'User not logged in';
 
-      final userDoc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
-      if (!userDoc.exists) return 'User data not found';
-
       final credential = EmailAuthProvider.credential(
         email: user.email!,
         password: currentPassword,
       );
+      print('Reauthenticating with email: ${user.email}, password: $currentPassword');
 
       await user.reauthenticateWithCredential(credential);
+
+
       await user.updatePassword(newPassword);
+
 
       await FirebaseFirestore.instance
           .collection('users')
@@ -36,9 +37,11 @@ class PasswordService {
           .update({'lastPasswordChange': FieldValue.serverTimestamp()});
 
       return null; // success
+
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wrong-password') return 'Incorrect current password';
       if (e.code == 'weak-password') return 'Use a stronger password (min 6 chars)';
+      if (e.code == 'requires-recent-login') return 'Please log in again and try changing the password';
       return 'Firebase error: ${e.message}';
     } catch (e) {
       return 'Error: ${e.toString()}';

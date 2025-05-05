@@ -3,9 +3,9 @@ import 'package:fitness_app/core/utils/color_extension.dart';
 import 'package:fitness_app/widgets/health_related_widgets/nutrient_info_row.dart';
 
 class NutritionInfoSection extends StatelessWidget {
-  final double fatGrams, dailyCalorieGoal;
-  final double proteinGrams;
-  final double carbsGrams;
+  final int fatGrams, dailyCalorieGoal;
+  final int proteinGrams;
+  final int carbsGrams;
 
   const NutritionInfoSection({
     super.key,
@@ -16,13 +16,13 @@ class NutritionInfoSection extends StatelessWidget {
   });
 
   // Updated max values
-  static const double maxFat = 200;
-  static const double maxProtein = 250;
-  static const double maxCarbs = 400;
+  static const int maxFat = 200;
+  static const int maxProtein = 250;
+  static const int maxCarbs = 400;
 
-  double get fatPercent => (fatGrams / maxFat).clamp(0.0, 1.0);
-  double get proteinPercent => (proteinGrams / maxProtein).clamp(0.0, 1.0);
-  double get carbsPercent => (carbsGrams / maxCarbs).clamp(0.0, 1.0);
+  int get fatPercent => ((fatGrams / maxFat) * 100).clamp(0, 100).toInt();
+  int get proteinPercent => ((proteinGrams / maxProtein) * 100).clamp(0, 100).toInt();
+  int get carbsPercent => ((carbsGrams / maxCarbs) * 100).clamp(0, 100).toInt();
 
   @override
   Widget build(BuildContext context) {

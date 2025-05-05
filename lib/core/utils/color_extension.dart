@@ -21,11 +21,14 @@ class MyColors {
   static Color get chart_blue => const Color (0xff878ced);
   static Color get chart_grey => const Color (0xfff4f6fa);
 
+  static Color get grey_200 => const Color(0xFFEEEEEE);
+  static Color get grey_300 => const Color(0xE0E0E0FF);
+  static Color get grey_400 => const Color(0xBDBDBDFF);
+  static Color get blue_register => const Color(0xff626ae7);
 
-
-
-
-
+  static const Color border = Colors.grey;
+  static const Color fillColor = Color(0xFFE0E0E0);
+  static const Color orange=Colors.orange;
 
 
 

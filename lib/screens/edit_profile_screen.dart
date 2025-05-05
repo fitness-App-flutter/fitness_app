@@ -75,12 +75,6 @@ class EditProfileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
 
-                  EditTextField(
-                    controller: controller.emailController,
-                    hintText: "Enter Email",
-                  ),
-                  const SizedBox(height: 20),
-
                   // Weight and Height Selection
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

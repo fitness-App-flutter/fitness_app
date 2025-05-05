@@ -4,13 +4,13 @@ import 'package:syncfusion_flutter_core/theme.dart';
 import 'custom_slider_thumb.dart';
 
 class CustomSlider extends StatelessWidget {
-  final double value;
-  final double min;
-  final double max;
-  final ValueChanged<double> onChanged;
+  final int value;
+  final int min;
+  final int max;
+  final ValueChanged<int> onChanged;
   final Color color;
   final Color tooltipColor;
-  final String Function(double)? tooltipFormatter;
+  final String Function(int)? tooltipFormatter;
 
   const CustomSlider({
     super.key,
@@ -30,23 +30,23 @@ class CustomSlider extends StatelessWidget {
         tooltipBackgroundColor: tooltipColor,
       ),
       child: SfSlider(
-        min: min,
-        max: max,
-        value: value,
+        min: min.toDouble(),
+        max: max.toDouble(),
+        value: value.toDouble(),
         showTicks: false,
         showLabels: false,
         enableTooltip: true,
         activeColor: color,
         inactiveColor: color.withOpacity(0.3),
-        tooltipTextFormatterCallback: (dynamic value, String formattedText) {
-          return tooltipFormatter != null ? tooltipFormatter!(value.toDouble()) : "${value.toInt()}";
+        tooltipTextFormatterCallback: (dynamic val, String formattedText) {
+          return tooltipFormatter != null ? tooltipFormatter!(val.toInt()) : "${val.toInt()}";
         },
         thumbIcon: CustomSliderThumb(
           thumbRadius: 12,
           borderColor: color,
         ),
         onChanged: (dynamic newValue) {
-          onChanged(newValue);
+          onChanged((newValue as double).round());
         },
       ),
     );
