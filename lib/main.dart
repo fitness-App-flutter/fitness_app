@@ -6,6 +6,7 @@ import 'package:fitness_app/auth/cubit/reset_password_cubit.dart';
 import 'package:fitness_app/auth/cubit/sign_up_cubit.dart';
 import 'package:fitness_app/auth/views/login_screen.dart';
 import 'package:fitness_app/core/utils/step_counter_logic.dart';
+import 'package:fitness_app/auth/views/health_journey_screen.dart';
 import 'package:fitness_app/firebase_options.dart';
 import 'package:fitness_app/screens/overview_page.dart';
 import 'package:fitness_app/screens/profile_screen.dart';
@@ -18,15 +19,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 import 'auth/views/sign_up_screen.dart';
+import 'package:fitness_app/core/utils/notifications_logic.dart';
+
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Ensure Firebase is initialized before running the app
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await initNotifications();
+  await requestNotificationPermission();
 
   runApp(
     DevicePreview(
@@ -35,13 +40,14 @@ void main() async {
         providers: [
           ChangeNotifierProvider(create: (_) => ProfileController()),
           ChangeNotifierProvider(create: (_) => NutrientProvider()),
-          ChangeNotifierProvider(create: (_) => StepCounterLogic())
+          ChangeNotifierProvider(create: (_) => StepCounterLogic()),
         ],
         child: const MyApp(),
       ),
     ),
   );
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -3,21 +3,29 @@ import 'package:fitness_app/core/utils/color_extension.dart';
 
 class HealthProgressHeader extends StatelessWidget {
   final int consumedKcal;
-  final int dailyCalorieGoal;
+  final double weight; // in kg
+  final double height; // in cm
 
-  static const int fixedChartGoal = 2000; // Fixed reference for the chart
+  static const int fixedChartGoal = 2000;
 
   const HealthProgressHeader({
     super.key,
     required this.consumedKcal,
-    required this.dailyCalorieGoal,
+    required this.weight,
+    required this.height,
   });
+
+  double calculateDailyCalorieGoal(double weight, double height) {
+    double bmr = 10 * weight + 6.25 * height - 161;
+    return bmr * 1.55;
+  }
 
   @override
   Widget build(BuildContext context) {
-    double percentageOfUserGoal = (consumedKcal / dailyCalorieGoal) * 100;
-    double percentageOfChartGoal = (consumedKcal / fixedChartGoal) * 100;
-    bool exceededGoal = consumedKcal > dailyCalorieGoal;
+    final dailyCalorieGoal = calculateDailyCalorieGoal(weight, height);
+    final double percentageOfUserGoal = (consumedKcal / dailyCalorieGoal) * 100;
+    final double percentageOfChartGoal = (consumedKcal / fixedChartGoal) * 100;
+    final bool exceededGoal = consumedKcal > dailyCalorieGoal;
 
     return Scaffold(
       backgroundColor: Colors.white,

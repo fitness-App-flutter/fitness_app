@@ -127,6 +127,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomButton(
                       text: "Login",
                       onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const OverviewPage()));
                         if (formKey.currentState!.validate()) {
                           setState(() => isLoading = true);
                           BlocProvider.of<LoginCubit>(context).login(

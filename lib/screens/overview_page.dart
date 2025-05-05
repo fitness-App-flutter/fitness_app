@@ -13,7 +13,7 @@ class OverviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final stepsCount = context.watch<StepCounterLogic>().steps;
+    final stepsCount = context.watch<StepCounterLogic>().stepsToday;
 
     return Scaffold(
       backgroundColor: Colors.white,
