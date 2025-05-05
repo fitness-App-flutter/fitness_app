@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness_app/auth/cubit/login_cubit.dart';
 import 'package:fitness_app/auth/cubit/reset_password_cubit.dart';
 import 'package:fitness_app/auth/cubit/sign_up_cubit.dart';
+import 'package:fitness_app/auth/views/health_journey_screen.dart';
 import 'package:fitness_app/firebase_options.dart';
 import 'package:fitness_app/screens/profile_screen.dart';
 import 'package:fitness_app/widgets/profile_related_widgets/info_related_widgets/profile_image_cubit/image_cubit.dart';
@@ -55,7 +56,7 @@ class MyApp extends StatelessWidget {
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        home: _getInitialScreen(),  // Determine the initial screen based on login state
+        home: const HealthJourneyScreen(),  // Determine the initial screen based on login state
       ),
     );
   }
@@ -65,10 +66,10 @@ class MyApp extends StatelessWidget {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       // If user is logged in, show the ProfileScreen
-      return ProfileScreen();
+      return const ProfileScreen();
     } else {
       // If user is not logged in, show the SignUpScreen
-      return SignUpScreen();
+      return const SignUpScreen();
     }
   }
 }

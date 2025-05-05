@@ -5,6 +5,7 @@ import 'package:fitness_app/auth/widges/custom_button.dart';
 import 'package:fitness_app/auth/widges/custom_text_field.dart';
 import 'package:fitness_app/auth/widges/screen_title.dart';
 import 'package:fitness_app/core/helper/snack_bar.dart';
+import 'package:fitness_app/screens/overview_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -35,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ShowDialog(context, 'Great to see you again');
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => ProfileScreen()),
+            MaterialPageRoute(builder: (context) => const ProfileScreen()),
           );
         } else if (state is LoginFailure) {
           setState(() => isLoading = false);
@@ -126,6 +127,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomButton(
                       text: "Login",
                       onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const OverviewPage()));
                         if (formKey.currentState!.validate()) {
                           setState(() => isLoading = true);
                           BlocProvider.of<LoginCubit>(context).login(
