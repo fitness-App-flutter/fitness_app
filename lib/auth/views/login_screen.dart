@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ShowDialog(context, 'Great to see you again');
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const ProfileScreen()),
+            MaterialPageRoute(builder: (context) => OverviewPage()),
           );
         } else if (state is LoginFailure) {
           setState(() => isLoading = false);

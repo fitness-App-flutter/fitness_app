@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'report_card.dart';
 
 class ReportSection extends StatelessWidget {
-  const ReportSection({super.key});
+  final int stepsCount;
+
+  const ReportSection({super.key, required this.stepsCount});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,17 @@ class ReportSection extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 16),
+              GridView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  childAspectRatio: aspectRatio,
+                ),
+                children: const [],
+              ),
               GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -38,11 +51,11 @@ class ReportSection extends StatelessWidget {
                 ),
                 itemCount: 4,
                 itemBuilder: (context, index) {
-                  const items = [
-                    ReportCard(emoji: "👣", value: "697,978", label: "Steps"),
-                    ReportCard(emoji: "💪", value: "6h 45min", label: "Workout"),
-                    ReportCard(emoji: "❤️", value: "108 bpm/day", label: "Health"),
-                    ReportCard(emoji: "😴", value: "29h 17min", label: "Sleep")
+                  final items = [
+                    ReportCard(emoji: "👣", value: stepsCount.toString(), label: "Steps"),
+                    const ReportCard(emoji: "💪", value: "6h 45min", label: "Workout"),
+                    const ReportCard(emoji: "❤️", value: "108 bpm/day", label: "Health"),
+                    const ReportCard(emoji: "😴", value: "29h 17min", label: "Sleep")
                   ];
                   return items[index];
                 },
