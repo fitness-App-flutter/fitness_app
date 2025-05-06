@@ -20,9 +20,12 @@ class StepCounterLogic extends ChangeNotifier {
   static const int _bufferSize = 3;
   static const double _stepThreshold = 5.0;
   static const double _resetThreshold = 3.0;
-  static const double _stepLength = 0.762;
-  static const int _dailyStepGoal = 18000;
+  static const double _stepLength = 0.762; // بالمتر
+  static const int _dailyStepGoal = 18000; // هدف 18,000 خطوة يوميًا
   static const double _dailyDistanceGoal = _dailyStepGoal * _stepLength;
+
+  // إضافة Getter لـ dailyStepGoal
+  int get dailyStepGoal => _dailyStepGoal;
 
   int get stepsToday => _stepsToday;
   int get totalSteps => _totalSteps;
@@ -32,6 +35,12 @@ class StepCounterLogic extends ChangeNotifier {
   double get stepProgress => (_stepsToday / _dailyStepGoal).clamp(0.0, 1.0);
   String get formattedDailyDistanceGoal => (_dailyDistanceGoal / 1000).toStringAsFixed(1);
   bool get isDataLoaded => _isDataLoaded;
+
+  int get caloriesBurned => (_stepsToday * 0.04).round(); // حساب الكالوريز بناءً على عدد الخطوات
+  int get walkingMinutes {
+    // حساب وقت المشي بناءً على الهدف اليومي
+    return ((_stepsToday / _dailyStepGoal) * (_dailyStepGoal / 100)).round();
+  }
 
   StepCounterLogic() {
     _initStepCounter();
@@ -67,8 +76,9 @@ class StepCounterLogic extends ChangeNotifier {
           .get();
 
       if (dailyDoc.exists) {
-        _stepsToday = (dailyDoc.data()?['steps'] as num?)?.toInt() ?? 0;
-        _distanceToday = (dailyDoc.data()?['distance'] as num?)?.toDouble() ?? 0.0;
+        final data = dailyDoc.data();
+        _stepsToday = (data?['steps'] as num?)?.toInt() ?? 0;
+        _distanceToday = (data?['distance'] as num?)?.toDouble() ?? 0.0;
       }
 
       final summaryDoc = await FirebaseFirestore.instance
@@ -79,8 +89,9 @@ class StepCounterLogic extends ChangeNotifier {
           .get();
 
       if (summaryDoc.exists) {
-        _totalSteps = (summaryDoc.data()?['totalSteps'] as num?)?.toInt() ?? 0;
-        _totalDistance = (summaryDoc.data()?['totalDistance'] as num?)?.toDouble() ?? 0.0;
+        final data = summaryDoc.data();
+        _totalSteps = (data?['totalSteps'] as num?)?.toInt() ?? 0;
+        _totalDistance = (data?['totalDistance'] as num?)?.toDouble() ?? 0.0;
       }
 
       _isDataLoaded = true;
@@ -148,6 +159,8 @@ class StepCounterLogic extends ChangeNotifier {
     if (userId == null) return;
 
     final today = _getFormattedDate();
+    final calories = (_stepsToday * 0.04).round();
+    final minutes = (_stepsToday / 100).round();
 
     try {
       await FirebaseFirestore.instance
@@ -158,6 +171,8 @@ class StepCounterLogic extends ChangeNotifier {
           .set({
         'steps': _stepsToday,
         'distance': _distanceToday,
+        'calories': calories,
+        'walkingMinutes': minutes,
         'date': today,
         'lastUpdate': FieldValue.serverTimestamp(),
       }, SetOptions(merge: true));
@@ -173,7 +188,7 @@ class StepCounterLogic extends ChangeNotifier {
         'lastUpdate': FieldValue.serverTimestamp(),
       }, SetOptions(merge: true));
 
-      print('✅ تم حفظ البيانات - الخطوات: $_stepsToday, المسافة: ${_distanceToday.toStringAsFixed(2)}m');
+      print('✅ تم حفظ البيانات - خطوات: $_stepsToday، مسافة: ${_distanceToday.toStringAsFixed(2)}m، سعرات: $calories، وقت: $minutes دقيقة');
     } catch (e) {
       print('❌ خطأ في حفظ البيانات: $e');
     }
