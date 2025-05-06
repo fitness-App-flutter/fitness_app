@@ -18,9 +18,29 @@ class StepsHeader extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Text(
-          "Steps",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        SizedBox(
+          height: 50,
+          child: Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              const Expanded(
+                child: Center(
+                  child: Text(
+                    "Steps",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 48,
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 8),
         const Text(

@@ -11,7 +11,6 @@ class StepsStatistics extends StatelessWidget {
     final stepCounter = Provider.of<StepCounterLogic>(context);
 
     final distanceInKm = (stepCounter.distanceToday / 1000).toStringAsFixed(1);
-    final goalInKm = stepCounter.formattedDailyDistanceGoal;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -19,8 +18,8 @@ class StepsStatistics extends StatelessWidget {
         StatItem(
           icon: Icons.local_fire_department,
           iconColor: const Color(0xff7f55E0),
-          percent: 0.75,
-          value: "850 kcal",
+          percent: (stepCounter.caloriesBurned / (stepCounter.dailyStepGoal * 0.04)).clamp(0.0, 1.0),
+          value: "${stepCounter.caloriesBurned} kcal",
         ),
         StatItem(
           icon: Icons.location_on,
@@ -31,8 +30,8 @@ class StepsStatistics extends StatelessWidget {
         StatItem(
           icon: Icons.access_time,
           iconColor: const Color(0xff636AE8),
-          percent: 0.85,
-          value: "120 min",
+          percent: (stepCounter.walkingMinutes / 180).clamp(0.0, 1.0),
+          value: "${stepCounter.walkingMinutes} min",
         ),
       ],
     );
