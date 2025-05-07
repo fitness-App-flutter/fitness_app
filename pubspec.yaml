@@ -39,6 +39,7 @@ dependencies:
   image_picker: ^1.1.2
   intl: ^0.19.0
   file: ^7.0.1
+  firebase_storage: ^12.4.5
 
 
 dev_dependencies:
@@ -59,6 +60,11 @@ flutter:
     - assets/images/runner.jpg
     - assets/images/shose.png
     - assets/images/profile.jpg
+    - assets/images/user_icon.jpg
+fonts:
+  - family: NotoSans
+    fonts:
+      - asset: fonts/NotoSans-Regular.ttf
 
 flutter_native_splash:
   color: "#33373A"

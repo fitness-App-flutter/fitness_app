@@ -12,6 +12,9 @@ class ProfileController extends ChangeNotifier {
   int _height = 0;
   String? _profileImageUrl;
   String? get profileImageUrl => _profileImageUrl;
+  bool _isLoading = true;
+  bool get isLoading => _isLoading;
+
 
 
   // Controllers
@@ -37,20 +40,29 @@ class ProfileController extends ChangeNotifier {
     _loadProfileData();
   }
 
-  // Load user profile data
+  Future<void> init() async {
+    await _loadProfileData(); // Load the data here
+  }
+
   Future<void> _loadProfileData() async {
+    _isLoading = true;
+    notifyListeners();
+
     final user = _auth.currentUser;
-    if (user == null) return;
+    if (user == null) {
+      _isLoading = false;
+      return;
+    }
 
     try {
       final doc = await _firestore.collection('users').doc(user.uid).get();
       if (!doc.exists) return;
 
       final data = doc.data();
-      _name = data?['name'] ?? "";
-      _email = data?['email'] ?? user.email ?? "";
-      _weight = (data?['weight'] ?? 0).toInt();
-      _height = (data?['height'] ?? 0).toInt();
+      _name = data?['name'] ?? name;
+      _email = data?['email'] ?? user.email ?? email;
+      _weight = (data?['weight'] ?? weight).toInt();
+      _height = (data?['height'] ?? height).toInt();
       _isPrivate = data?['isPrivate'] ?? false;
       _profileImageUrl = data?['profileImageUrl'];
 
@@ -59,13 +71,14 @@ class ProfileController extends ChangeNotifier {
       emailController.text = _email;
       weightController.text = _weight.toString();
       heightController.text = _height.toString();
-
     } catch (e) {
       print("Error loading profile data: $e");
     }
 
+    _isLoading = false;
     notifyListeners();
   }
+
 
   // Update Firestore user data
   Future<void> _updateFirestoreData(Map<String, dynamic> data) async {

@@ -24,7 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String? selectedTarget;
   double weight = 50;
   int height = 170;
-  String? email, password;
+  String? email, password,name;
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
 
@@ -80,6 +80,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(height: 8),
                     CustomTextField(
                       hintText: "Enter name",
+                      onchange: (data) {
+                        name = data;
+                      },
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "Name is required";
@@ -228,6 +231,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 target: selectedTarget!,
                                 weight: weight,
                                 email: email!,
+                                name: name,
                                 password: password!);
                             return ShowDialog(context,
                                 'Welcome to the family!\n Your journey starts now');
