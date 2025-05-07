@@ -1,3 +1,5 @@
+import 'package:fitness_app/screens/health_screen.dart';
+import 'package:fitness_app/screens/steps_page.dart';
 import 'package:flutter/material.dart';
 import 'category_icon.dart';
 
@@ -6,9 +8,9 @@ class CategorySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
@@ -17,13 +19,29 @@ class CategorySection extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            CategoryIcon(imagePath: "assets/images/steps_icon.jpg", label: "Steps"),
-            CategoryIcon(imagePath: "assets/images/workout_icon.jpg", label: "Workout"),
-            CategoryIcon(imagePath: "assets/images/health_icon.jpg", label: "Health"),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const StepsPage()),
+                );
+              },
+              child: const CategoryIcon(imagePath: "assets/images/steps_icon.jpg", label: "Steps"),
+            ),
+            const CategoryIcon(imagePath: "assets/images/workout_icon.jpg", label: "Workout"),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HealthScreen()),
+                );
+              },
+              child: const CategoryIcon(imagePath: "assets/images/health_icon.jpg", label: "Health"),
+            ),
           ],
         ),
       ],
