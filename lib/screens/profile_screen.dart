@@ -8,6 +8,7 @@ import 'package:fitness_app/widgets/profile_related_widgets/profile_controller.d
 import 'package:fitness_app/widgets/profile_related_widgets/profile_avatar.dart';
 import 'package:fitness_app/widgets/profile_related_widgets/profile_toggle_buttons.dart';
 import 'package:fitness_app/widgets/table_widgets/workout_exercise_table.dart';
+import 'package:fitness_app/widgets/profile_related_widgets/info_related_widgets/logout_button.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -15,7 +16,11 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => ProfileController(),  // ProfileController is being provided here
+      create: (_) {
+        final controller = ProfileController();
+        controller.init();
+        return controller;
+      },
       child: Scaffold(
         backgroundColor: MyColors.white,
         appBar: AppBar(
@@ -52,26 +57,21 @@ class ProfileScreen extends StatelessWidget {
                     )
                         : Column(
                       children: [
-                        // Your profile info widget here
                         ProfileInfo(
                           name: controller.name,
                           email: controller.email,
-                          weight: controller.weight.toInt().toString(),
-                          height: controller.height.toInt().toString(),
+                          weight: controller.weight.toString(),
+                          height: controller.height.toString(),
                           onEditPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const EditProfileScreen(),
                               ),
-                            ).then((_) => controller.reloadProfile());  // Reload profile after editing
+                            ).then((_) => controller.reloadProfile());
                           },
                         ),
                         const SizedBox(height: 20),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: WorkoutTable(),
-                        ),
                       ],
                     ),
                   ],
@@ -80,7 +80,12 @@ class ProfileScreen extends StatelessWidget {
             );
           },
         ),
+        bottomNavigationBar: const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: LogoutButton(),
+        ),
       ),
     );
+
   }
 }

@@ -1,23 +1,34 @@
+import 'package:fitness_app/core/utils/color_extension.dart';
 import 'package:flutter/material.dart';
 
 class HeightSelector extends StatelessWidget {
-  final int height;
-  final VoidCallback onIncrease;
-  final VoidCallback onDecrease;
+  final int? value;
+  final int? min;
+  final int? max;
+  final ValueChanged<int>? onChanged;
+
+  final int? height;
+  final VoidCallback? onIncrease;
+  final VoidCallback? onDecrease;
 
   const HeightSelector({
     super.key,
-    required this.height,
-    required this.onIncrease,
-    required this.onDecrease,
+    this.value,
+    this.min,
+    this.max,
+    this.onChanged,
+    this.height,
+    this.onIncrease,
+    this.onDecrease,
   });
 
   @override
   Widget build(BuildContext context) {
+    final currentHeight = value ?? height ?? 0;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
           decoration: BoxDecoration(
@@ -31,19 +42,25 @@ class HeightSelector extends StatelessWidget {
                 color: Colors.grey[200],
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 child: IconButton(
-                  onPressed: onDecrease,
+                  onPressed: onDecrease ??
+                      (onChanged != null && min != null && currentHeight > min!
+                          ? () => onChanged!(currentHeight - 1)
+                          : null),
                   icon: const Icon(Icons.remove, color: Colors.grey),
                 ),
               ),
               Text(
-                height.toString(),
+                currentHeight.toString(),
                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Card(
-                color: const Color(0xff626ae7),
+                color: MyColors.blue_register,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 child: IconButton(
-                  onPressed: onIncrease,
+                  onPressed: onIncrease ??
+                      (onChanged != null && max != null && currentHeight < max!
+                          ? () => onChanged!(currentHeight + 1)
+                          : null),
                   icon: const Icon(Icons.add, color: Colors.white),
                 ),
               ),

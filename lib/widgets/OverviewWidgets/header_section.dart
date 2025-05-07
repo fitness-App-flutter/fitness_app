@@ -56,7 +56,7 @@ class HeaderSection extends StatelessWidget {
                   backgroundColor: Colors.grey[300],
                   backgroundImage: imageUrl != null
                       ? NetworkImage(imageUrl)
-                      : const AssetImage('assets/images/profile.jpg') as ImageProvider,
+                      : const AssetImage('assets/images/user_icon.jpg') as ImageProvider,
                 ),
               );
             },
