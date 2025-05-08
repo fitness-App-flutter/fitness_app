@@ -35,7 +35,7 @@ class OverviewPage extends StatelessWidget {
               const CategorySection(),
               const SizedBox(height: 24),
               ReportSection(stepsCount: stepsCount),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               const MoreDetailsButton(),
             ],
           ),

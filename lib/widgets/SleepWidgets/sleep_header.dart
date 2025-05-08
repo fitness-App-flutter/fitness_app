@@ -5,33 +5,52 @@ class SleepHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center( // Center the content horizontally
-      child: Column(
-        mainAxisSize: MainAxisSize.min, // Minimize the height of the Column
-        children: [
-          const Text(
-            "Sleep",
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black),
-          ),
-          const SizedBox(height: 8),
-          RichText(
-            text: const TextSpan(
-              style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold ,color: Colors.black),
-              children: [
-                TextSpan(text: "Your average time of\n"),
-                TextSpan(
-                  text: "sleep a day is ",
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+          child: Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              const Spacer(),
+              const Text(
+                "Sleep",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
-                TextSpan(
-                  text: "7h 31 min",
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
-                ),
-              ],
-            ),
-            textAlign: TextAlign.center, // Center-align the text
+              ),
+              const Spacer(flex: 2),
+            ],
           ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 8),
+        const Text(
+          "Your average time of\nsleep a day is ",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const Text(
+          "7h 31 min",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.blue,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 }
