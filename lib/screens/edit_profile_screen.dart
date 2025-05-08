@@ -80,10 +80,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       },
                     ),
                   ),
-                  const SizedBox(height: 30),
-                  EditTextField(
-                    controller: profileController.nameController,
-                    hintText: "Enter Name",
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Name", // Title text
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      EditTextField(
+                        controller: profileController.nameController,
+                        hintText: "Enter Name",
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 10),
                   Row(
@@ -148,12 +160,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               onChanged: (value) => profileController.updateHeight(value),
                               height: profileController.height.toInt(),
                               onIncrease: () {
-                                if (profileController.height < 180) {
+                                if (profileController.height < 220) {
                                   profileController.updateHeight(profileController.height + 1);
                                 }
                               },
                               onDecrease: () {
-                                if (profileController.height > 50) {
+                                if (profileController.height > 100) {
                                   profileController.updateHeight(profileController.height - 1);
                                 }
                               },
