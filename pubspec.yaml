@@ -57,6 +57,7 @@ flutter:
   assets:
     - assets/images/App_Logo.jpg
     - assets/images/health_icon.jpg
+    - assets/images/sleep_icon.jpg
     - assets/images/steps_icon.jpg
     - assets/images/workout_icon.jpg
     - assets/images/runner.jpg

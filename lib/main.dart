@@ -69,14 +69,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.home,
         onGenerateRoute: AppRoutes.generateRoute,
-        home: const SignUpScreen(),
+        home:  SignUpScreen(),
       ),
     );
   }
 
   Widget _getInitialScreen() {
     final user = FirebaseAuth.instance.currentUser;
-    return const SignUpScreen();
+    return  SignUpScreen();
 
   }
 }
