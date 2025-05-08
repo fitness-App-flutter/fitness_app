@@ -63,6 +63,10 @@ flutter:
     - assets/images/shose.png
     - assets/images/profile.jpg
     - assets/images/user_icon.jpg
+    - assets/images/bmi_underweight.gif
+    - assets/images/bmi_normal.gif
+    - assets/images/bmi_overweight.gif
+    - assets/images/bmi_obese.gif
 fonts:
   - family: NotoSans
     fonts:
