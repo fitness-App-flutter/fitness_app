@@ -20,11 +20,10 @@ class StepCounterLogic extends ChangeNotifier {
   static const int _bufferSize = 3;
   static const double _stepThreshold = 5.0;
   static const double _resetThreshold = 3.0;
-  static const double _stepLength = 0.762; // بالمتر
-  static const int _dailyStepGoal = 18000; // هدف 18,000 خطوة يوميًا
+  static const double _stepLength = 0.762;
+  static const int _dailyStepGoal = 18000;
   static const double _dailyDistanceGoal = _dailyStepGoal * _stepLength;
 
-  // إضافة Getter لـ dailyStepGoal
   int get dailyStepGoal => _dailyStepGoal;
 
   int get stepsToday => _stepsToday;
@@ -36,9 +35,8 @@ class StepCounterLogic extends ChangeNotifier {
   String get formattedDailyDistanceGoal => (_dailyDistanceGoal / 1000).toStringAsFixed(1);
   bool get isDataLoaded => _isDataLoaded;
 
-  int get caloriesBurned => (_stepsToday * 0.04).round(); // حساب الكالوريز بناءً على عدد الخطوات
+  int get caloriesBurned => (_stepsToday * 0.04).round();
   int get walkingMinutes {
-    // حساب وقت المشي بناءً على الهدف اليومي
     return ((_stepsToday / _dailyStepGoal) * (_dailyStepGoal / 100)).round();
   }
 
@@ -159,6 +157,7 @@ class StepCounterLogic extends ChangeNotifier {
     if (userId == null) return;
 
     final today = _getFormattedDate();
+    final hour = DateTime.now().hour.toString();
     final calories = (_stepsToday * 0.04).round();
     final minutes = (_stepsToday / 100).round();
 
@@ -168,12 +167,15 @@ class StepCounterLogic extends ChangeNotifier {
           .doc(userId)
           .collection('daily_steps')
           .doc(today)
+          .collection('hourly') // نضيف مجموعة `hourly` لتخزين البيانات لكل ساعة
+          .doc(hour)
           .set({
         'steps': _stepsToday,
         'distance': _distanceToday,
         'calories': calories,
         'walkingMinutes': minutes,
         'date': today,
+        'hour': hour,
         'lastUpdate': FieldValue.serverTimestamp(),
       }, SetOptions(merge: true));
 

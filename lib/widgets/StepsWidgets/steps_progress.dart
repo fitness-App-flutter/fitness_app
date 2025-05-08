@@ -69,7 +69,7 @@ class _StepsProgressState extends State<StepsProgress> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.directions_walk,
                 size: 30,
                 color: const Color(0xFF636AE8),
