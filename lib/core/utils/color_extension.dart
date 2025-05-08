@@ -30,6 +30,9 @@ class MyColors {
   static const Color fillColor = Color(0xFFE0E0E0);
   static const Color orange=Colors.orange;
 
+  static Color get logout_blue => const Color(0xff888CED);
+
+
 
 
 }

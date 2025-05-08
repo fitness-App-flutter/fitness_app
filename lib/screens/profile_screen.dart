@@ -1,3 +1,4 @@
+import 'package:fitness_app/widgets/profile_related_widgets/info_related_widgets/bmi_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness_app/screens/edit_profile_screen.dart';
 import 'package:fitness_app/widgets/password_related_widgets/changing_password.dart';
@@ -17,10 +18,10 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) {
-        final controller = ProfileController();
-        controller.init();
-        return controller;
-      },
+    final controller = ProfileController();
+    controller.init();
+    return controller;
+    },
       child: Scaffold(
         backgroundColor: MyColors.white,
         appBar: AppBar(
@@ -38,45 +39,49 @@ class ProfileScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
                     const ProfileAvatar(),
-                    const SizedBox(height: 20),
-                    ProfileToggleButtons(
-                      isPrivate: controller.isPrivate,
-                      onInfoSelected: () => controller.togglePrivacy(false),
-                      onPrivacySelected: () => controller.togglePrivacy(true),
-                    ),
-                    const SizedBox(height: 20),
-                    controller.isPrivate
-                        ? buildPasswordChangeScreenUI(
-                      context,
-                      controller.isPrivate,
-                          () => controller.togglePrivacy(false),
-                          () => controller.togglePrivacy(true),
-                    )
-                        : Column(
-                      children: [
-                        ProfileInfo(
-                          name: controller.name,
-                          email: controller.email,
-                          weight: controller.weight.toString(),
-                          height: controller.height.toString(),
-                          onEditPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const EditProfileScreen(),
-                              ),
-                            ).then((_) => controller.reloadProfile());
-                          },
-                        ),
-                        const SizedBox(height: 20),
-                      ],
-                    ),
-                  ],
+                const SizedBox(height: 20),
+                ProfileToggleButtons(
+                  isPrivate: controller.isPrivate,
+                  onInfoSelected: () => controller.togglePrivacy(false),
+                  onPrivacySelected: () => controller.togglePrivacy(true),
                 ),
+                const SizedBox(height: 20),
+                controller.isPrivate
+                    ? buildPasswordChangeScreenUI(
+                  context,
+                  controller.isPrivate,
+                      () => controller.togglePrivacy(false),
+                      () => controller.togglePrivacy(true),
+                )
+                    : Column(
+                  children: [
+                  ProfileInfo(
+                  name: controller.name,
+                  email: controller.email,
+                  weight: controller.weight.toString(),
+                  height: controller.height.toString(),
+                  onEditPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const EditProfileScreen(),
+                      ),
+                    ).then((_) => controller.reloadProfile());
+                  },
+                ),
+                const SizedBox(height: 20),
+                    BmiIndicator(
+                      heightCm: controller.height.toDouble(),
+                      weightKg: controller.weight.toDouble(),
+                    ),
+                ],
               ),
+              ],
+            ),
+            ),
             );
           },
         ),

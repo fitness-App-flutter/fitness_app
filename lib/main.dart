@@ -11,6 +11,7 @@ import 'package:fitness_app/firebase_options.dart';
 import 'package:fitness_app/screens/overview_page.dart';
 import 'package:fitness_app/screens/profile_screen.dart';
 import 'package:fitness_app/widgets/health_related_widgets/nutrient_provider.dart';
+import 'package:fitness_app/widgets/profile_related_widgets/app_routes.dart';
 import 'package:fitness_app/widgets/profile_related_widgets/info_related_widgets/profile_image_cubit/image_cubit.dart';
 import 'package:fitness_app/widgets/profile_related_widgets/profile_controller.dart';
 import 'package:flutter/foundation.dart';
@@ -70,17 +71,16 @@ class MyApp extends StatelessWidget {
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        home: _getInitialScreen(),
+        initialRoute: AppRoutes.home,
+        onGenerateRoute: AppRoutes.generateRoute,
+        home: SignUpScreen(),
       ),
     );
   }
 
   Widget _getInitialScreen() {
     final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      return const OverviewPage();
-    } else {
-      return const LoginScreen();
-    }
+    return SignUpScreen();
+
   }
 }

@@ -26,7 +26,7 @@ class ProfileAvatar extends StatelessWidget {
             radius: 50,
             backgroundImage: imageFile != null
                 ? FileImage(imageFile)
-                : const AssetImage('assets/images/profile.jpg'),
+                : const AssetImage('assets/images/user_icon.jpg'),
           ),
         );
       },
