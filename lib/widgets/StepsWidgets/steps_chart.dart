@@ -1,4 +1,4 @@
-// lib/widgets/StepsWidgets/steps_chart.dart
+import 'package:fitness_app/core/utils/step_chart_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness_app/widgets/StepsWidgets/period_selector.dart';
 import 'package:fitness_app/widgets/StepsWidgets/steps_line_chart.dart';
@@ -11,6 +11,25 @@ class StepsChart extends StatefulWidget {
 
 class _StepsChartState extends State<StepsChart> {
   String selectedPeriod = 'Today';
+  List<double> stepData = [];
+  List<String> labels = [];
+
+  final StepChartLogic _logic = StepChartLogic();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadChartData();
+  }
+
+  Future<void> _loadChartData() async {
+    final data = await _logic.getStepData(selectedPeriod);
+    final labelList = _logic.getChartLabels(selectedPeriod);
+    setState(() {
+      stepData = data;
+      labels = labelList;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +51,19 @@ class _StepsChartState extends State<StepsChart> {
               setState(() {
                 selectedPeriod = newPeriod;
               });
+              _loadChartData();
             },
           ),
           const SizedBox(height: 16),
-          Expanded(child: StepsLineChart(period: selectedPeriod)),
+          stepData.isEmpty
+              ? const Center(child: CircularProgressIndicator())
+              : Expanded(
+            child: StepsLineChart(
+              period: selectedPeriod,
+              stepData: stepData,
+              labels: labels,
+            ),
+          ),
         ],
       ),
     );
