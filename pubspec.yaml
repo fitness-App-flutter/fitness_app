@@ -41,6 +41,8 @@ dependencies:
   file: ^7.0.1
   firebase_storage: ^12.4.5
   flutter_animate: ^4.2.0
+  just_audio: ^0.9.35
+  android_alarm_manager_plus: ^4.0.7
 
 
 
@@ -68,6 +70,7 @@ flutter:
     - assets/images/bmi_normal.gif
     - assets/images/bmi_overweight.gif
     - assets/images/bmi_obese.gif
+    - assets/sounds/alarm.mp3
 fonts:
   - family: NotoSans
     fonts:
