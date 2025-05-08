@@ -28,7 +28,7 @@ class MoreDetailsButton extends StatelessWidget {
               "Sleep",
               style: TextStyle(fontWeight: FontWeight.bold,
                 color: Colors.white,
-                fontSize: 24,
+                fontSize: 12,
               ),
             ),
             SizedBox(width: 64),

@@ -1,3 +1,4 @@
+import 'package:fitness_app/core/utils/color_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -20,10 +21,14 @@ class LogoutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       onPressed: () => _logout(context),
-      icon: const Icon(Icons.logout),
+      icon: const Icon(
+        Icons.logout,
+        color: Colors.white, // Change this to any color you like
+      ),
+
       label: const Text('Logout'),
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.redAccent,
+        backgroundColor: MyColors.PrimaryBlue,
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
