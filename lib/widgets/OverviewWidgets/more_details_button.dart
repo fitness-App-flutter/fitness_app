@@ -1,3 +1,4 @@
+import 'package:fitness_app/screens/sleep_page.dart';
 import 'package:flutter/material.dart';
 
 class MoreDetailsButton extends StatelessWidget {
@@ -8,39 +9,40 @@ class MoreDetailsButton extends StatelessWidget {
     return Center(
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xff7f54df), // لون الخلفية
+          backgroundColor: Color(0xff7f54df),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14), // استدارة الحواف
+            borderRadius: BorderRadius.circular(14),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12), // تعديل الحشو
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         ),
         onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("More details clicked!")),
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SleepPage()),
           );
         },
         child: const Row(
-          mainAxisSize: MainAxisSize.min, // لجعل الصف يأخذ أقل مساحة ممكنة
+          mainAxisSize: MainAxisSize.min,
           children: [
-             Text(
-              "More Details",
-              style: TextStyle(
-                color: Colors.white, // لون النص
-                fontSize: 12, // حجم النص
+            Text(
+              "Sleep",
+              style: TextStyle(fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontSize: 24,
               ),
             ),
-             SizedBox(width: 64), // زيادة المسافة بين النص والأسهم
+            SizedBox(width: 64),
             Row(
               children: [
                 Icon(
-                  Icons.arrow_forward_ios, // أيقونة السهم (>)
-                  color: Color(0xff9770e8), // اللون الأول
-                  size: 24, // حجم الأيقونة
+                  Icons.arrow_forward_ios,
+                  color: Color(0xff9770e8),
+                  size: 24,
                 ),
                 Icon(
                   Icons.arrow_forward_ios,
                   color: Color(0xffb491f8),
-                  size: 24, // حجم الأيقونة
+                  size: 24,
                 ),
                 Icon(
                   Icons.arrow_forward_ios,
