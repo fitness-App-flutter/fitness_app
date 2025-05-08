@@ -23,7 +23,7 @@ class ReportSection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "This week report",
+                    "Today report",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                 ],
