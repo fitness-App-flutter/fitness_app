@@ -72,7 +72,7 @@ class ProfileScreen extends StatelessWidget {
                     ).then((_) => controller.reloadProfile());
                   },
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                     BmiIndicator(
                       heightCm: controller.height.toDouble(),
                       weightKg: controller.weight.toDouble(),

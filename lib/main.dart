@@ -19,6 +19,9 @@ import 'package:provider/provider.dart';
 import 'auth/views/sign_up_screen.dart';
 import 'package:fitness_app/core/utils/notifications_logic.dart';
 import 'package:fitness_app/screens/alarm_screen.dart';
+import 'dart:typed_data';
+import 'package:image_picker/image_picker.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -70,7 +73,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.home,
         onGenerateRoute: AppRoutes.generateRoute,
-        home:  AlarmScreen(title: '',),
+        home:  SignUpScreen(),
       ),
     );
   }

@@ -4,7 +4,6 @@ import '../widgets/OverviewWidgets/header_section.dart';
 import '../widgets/OverviewWidgets/health_overview_card.dart';
 import '../widgets/OverviewWidgets/category_section.dart';
 import '../widgets/OverviewWidgets/report_section.dart';
-import '../widgets/OverviewWidgets/more_details_button.dart';
 import 'package:provider/provider.dart';
 
 
@@ -35,8 +34,6 @@ class OverviewPage extends StatelessWidget {
               const CategorySection(),
               const SizedBox(height: 24),
               ReportSection(stepsCount: stepsCount),
-              const SizedBox(height: 20),
-              const MoreDetailsButton(),
             ],
           ),
         ),
