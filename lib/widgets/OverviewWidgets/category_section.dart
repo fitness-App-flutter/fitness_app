@@ -1,5 +1,6 @@
 import 'package:fitness_app/screens/health_screen.dart';
 import 'package:fitness_app/screens/steps_page.dart';
+import 'package:fitness_app/screens/sleep_page.dart';
 import 'package:flutter/material.dart';
 import 'category_icon.dart';
 
@@ -41,6 +42,15 @@ class CategorySection extends StatelessWidget {
                 );
               },
               child: const CategoryIcon(imagePath: "assets/images/health_icon.jpg", label: "Health"),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SleepPage()),
+                );
+              },
+              child: const CategoryIcon(imagePath: "assets/images/sleep_icon.jpg", label: "Sleep"),
             ),
           ],
         ),

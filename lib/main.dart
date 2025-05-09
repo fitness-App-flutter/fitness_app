@@ -1,3 +1,4 @@
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -6,7 +7,11 @@ import 'package:fitness_app/auth/cubit/reset_password_cubit.dart';
 import 'package:fitness_app/auth/cubit/sign_up_cubit.dart';
 import 'package:fitness_app/core/utils/step_counter_logic.dart';
 import 'package:fitness_app/firebase_options.dart';
+
 import 'package:fitness_app/screens/alarm_screen.dart';
+
+import 'package:fitness_app/services/alarm_service.dart';
+
 import 'package:fitness_app/widgets/health_related_widgets/nutrient_provider.dart';
 import 'package:fitness_app/widgets/profile_related_widgets/app_routes.dart';
 import 'package:fitness_app/widgets/profile_related_widgets/info_related_widgets/profile_image_cubit/image_cubit.dart';
@@ -18,7 +23,10 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 import 'auth/views/sign_up_screen.dart';
 import 'package:fitness_app/core/utils/notifications_logic.dart';
+
 import 'package:fitness_app/screens/alarm_screen.dart';
+
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +35,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  // تهيئة مدير المنبهات
+  await AndroidAlarmManager.initialize();
+  await AlarmService.initialize();
   await initNotifications();
   await requestNotificationPermission();
 
@@ -46,7 +57,6 @@ void main() async {
   );
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -54,12 +64,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => LoginCubit(),
-        ),
-        BlocProvider(
-          create: (context) => SignupCubit(),
-        ),
+        BlocProvider(create: (context) => LoginCubit()),
+        BlocProvider(create: (context) => SignupCubit()),
         BlocProvider(create: (context) => AuthCubit()),
         BlocProvider(create: (context) => ProfileCubit())
       ],
@@ -70,14 +76,21 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.home,
         onGenerateRoute: AppRoutes.generateRoute,
+
         home:  AlarmScreen(title: '',),
+
+        home: _getInitialScreen(),
+
       ),
     );
   }
 
   Widget _getInitialScreen() {
     final user = FirebaseAuth.instance.currentUser;
+
     return  SignUpScreen();
+
+    return const SignUpScreen();
 
   }
 }
