@@ -19,7 +19,7 @@ class CustomButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: MyColors.blue_register,
+          backgroundColor: MyColors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
@@ -27,7 +27,7 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           text,
-          style: TextStyle(color: MyColors.grey_200, fontSize: 16),
+          style: TextStyle(color: MyColors.blue_register, fontSize: 16),
         ),
       ),
     );
