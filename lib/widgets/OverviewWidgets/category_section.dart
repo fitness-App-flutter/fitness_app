@@ -1,6 +1,7 @@
 import 'package:fitness_app/screens/health_screen.dart';
 import 'package:fitness_app/screens/steps_page.dart';
 import 'package:fitness_app/screens/sleep_page.dart';
+import 'package:fitness_app/work_out/work_out_exercise_screen.dart';
 import 'package:flutter/material.dart';
 import 'category_icon.dart';
 
@@ -33,7 +34,15 @@ class CategorySection extends StatelessWidget {
               },
               child: const CategoryIcon(imagePath: "assets/images/steps_icon.jpg", label: "Steps"),
             ),
-            const CategoryIcon(imagePath: "assets/images/workout_icon.jpg", label: "Workout"),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const WorkoutExercisesScreen()),
+                );
+              },
+              child: const CategoryIcon(imagePath: "assets/images/workout_icon.jpg", label: "Workout"),
+            ),
             GestureDetector(
               onTap: () {
                 Navigator.push(
