@@ -8,7 +8,7 @@ class HealthOverviewCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Color(0xfff2f2fc),
+        color: const Color(0xfff2f2fc),
         borderRadius: BorderRadius.circular(12),
       ),
       child: const Column(

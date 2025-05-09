@@ -75,6 +75,30 @@ flutter:
     - assets/images/bmi_overweight.gif
     - assets/images/bmi_obese.gif
     - assets/sounds/alarm.mp3
+    - assets/images/Exercises_images/exercises_gifs_images/arms/Bicep_curl.gif
+    - assets/images/Exercises_images/exercises_gifs_images/arms/forearm.gif
+    - assets/images/Exercises_images/exercises_gifs_images/arms/tricep_extension.gif
+    - assets/images/Exercises_images/exercises_gifs_images/back/dead_lift.gif
+    - assets/images/Exercises_images/exercises_gifs_images/back/one_dumbel_row.gif
+    - assets/images/Exercises_images/exercises_gifs_images/back/pull_ups.gif
+    - assets/images/Exercises_images/exercises_gifs_images/chest/Bench_Press.gif
+    - assets/images/Exercises_images/exercises_gifs_images/chest/fly_machine.gif
+    - assets/images/Exercises_images/exercises_gifs_images/chest/incline_bench_press.gif
+    - assets/images/Exercises_images/exercises_gifs_images/core/crunch.gif
+    - assets/images/Exercises_images/exercises_gifs_images/core/hyper_extension.gif
+    - assets/images/Exercises_images/exercises_gifs_images/core/plank.gif
+    - assets/images/Exercises_images/exercises_gifs_images/legs/calf_raises.gif
+    - assets/images/Exercises_images/exercises_gifs_images/legs/lunges.gif
+    - assets/images/Exercises_images/exercises_gifs_images/legs/squats.gif
+    - assets/images/Exercises_images/exercises_gifs_images/shoulders/face_pulls.gif
+    - assets/images/Exercises_images/exercises_gifs_images/shoulders/lateral_rasies.gif
+    - assets/images/Exercises_images/exercises_gifs_images/shoulders/over_head.gif
+    - assets/images/Exercises_images/exercises_main_images/arms.jpeg
+    - assets/images/Exercises_images/exercises_main_images/back.jpeg
+    - assets/images/Exercises_images/exercises_main_images/chest.jpeg
+    - assets/images/Exercises_images/exercises_main_images/core.jpeg
+    - assets/images/Exercises_images/exercises_main_images/legs.jpeg
+    - assets/images/Exercises_images/exercises_main_images/shoulders.jpeg
 fonts:
   - family: NotoSans
     fonts:

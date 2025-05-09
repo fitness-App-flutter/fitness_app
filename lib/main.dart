@@ -76,9 +76,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.home,
         onGenerateRoute: AppRoutes.generateRoute,
-
-        home:  AlarmScreen(title: '',),
-
         home: _getInitialScreen(),
 
       ),

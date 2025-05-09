@@ -18,7 +18,7 @@ class WorkoutTableCell extends StatelessWidget {
         children: [
           Text(
             title!,
-            style: TextStyle(fontWeight: FontWeight.bold, color: Color(
+            style: const TextStyle(fontWeight: FontWeight.bold, color: Color(
                 0xFF7B55CE), fontSize: 14),
           ),
           for (var muscle in muscles!)
