@@ -1,4 +1,3 @@
-import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,7 +6,6 @@ import 'package:fitness_app/auth/cubit/reset_password_cubit.dart';
 import 'package:fitness_app/auth/cubit/sign_up_cubit.dart';
 import 'package:fitness_app/core/utils/step_counter_logic.dart';
 import 'package:fitness_app/firebase_options.dart';
-import 'package:fitness_app/services/alarm_service.dart';
 import 'package:fitness_app/widgets/health_related_widgets/nutrient_provider.dart';
 import 'package:fitness_app/widgets/profile_related_widgets/app_routes.dart';
 import 'package:fitness_app/widgets/profile_related_widgets/info_related_widgets/profile_image_cubit/image_cubit.dart';
@@ -27,9 +25,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // تهيئة مدير المنبهات
-  await AndroidAlarmManager.initialize();
-  await AlarmService.initialize();
   await initNotifications();
   await requestNotificationPermission();
 
