@@ -1,13 +1,11 @@
 import 'dart:io';
-
+import 'package:fitness_app/widgets/profile_related_widgets/info_related_widgets/profile_image_cubit/image_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'info_related_widgets/profile_image_cubit/image_cubit.dart';
-
 class ProfileAvatar extends StatelessWidget {
-  const ProfileAvatar({super.key});
+  const ProfileAvatar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +17,8 @@ class ProfileAvatar extends StatelessWidget {
             final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
             if (pickedFile != null) {
-              context.read<ProfileCubit>().changeProfilePicture(File(pickedFile.path));
+              final newImageFile = File(pickedFile.path);
+              context.read<ProfileCubit>().changeProfilePicture(newImageFile);
             }
           },
           child: CircleAvatar(
@@ -30,7 +29,6 @@ class ProfileAvatar extends StatelessWidget {
           ),
         );
       },
-
     );
   }
 }
