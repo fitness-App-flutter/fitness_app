@@ -21,6 +21,10 @@ class WorkoutExercisesScreen extends StatelessWidget {
         backgroundColor: const Color(0xFFF7F7F7),
         centerTitle: true,
         title: const Text('Workout Exercises', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        leading:Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: IconButton(icon: const Icon(Icons.arrow_back_ios, color: Colors.black87), onPressed: () => Navigator.pop(context)),
+        ),
         iconTheme: const IconThemeData(color: Colors.black),
       ),
       backgroundColor: const Color(0xFFF7F7F7),
