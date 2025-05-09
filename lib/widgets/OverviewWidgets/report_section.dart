@@ -31,10 +31,12 @@ class _ReportSectionState extends State<ReportSection> {
 
   Future<void> loadWaterCups() async {
     final cups = await _waterLogic.getWaterCups(userId);
-    if (cups != null) {
-      setState(() {
-        waterCups = cups;
-      });
+    setState(() {
+      waterCups = cups ?? 16; 
+    });
+
+    if (cups == null) {
+      await _waterLogic.updateWaterCups(userId, 16);
     }
   }
 
