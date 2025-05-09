@@ -12,6 +12,7 @@ import 'package:fitness_app/widgets/health_related_widgets/nutrient_provider.dar
 import 'package:fitness_app/widgets/profile_related_widgets/app_routes.dart';
 import 'package:fitness_app/widgets/profile_related_widgets/info_related_widgets/profile_image_cubit/image_cubit.dart';
 import 'package:fitness_app/widgets/profile_related_widgets/profile_controller.dart';
+import 'package:fitness_app/work_out/work_out_exercise_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,7 +68,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.home,
         onGenerateRoute: AppRoutes.generateRoute,
-        home: _getInitialScreen(),
+        home: const WorkoutExercisesScreen(),
       ),
     );
   }
