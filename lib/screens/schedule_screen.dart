@@ -142,12 +142,22 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> daysOfWeek = [
+      'Saturday',
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: ListView(
-        children: _sleepData.sleepTimes.keys.map((day) {
+        children: daysOfWeek.map((day) {
           final sleepDuration = _sleepData.getSleepDuration(day);
           return Card(
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
