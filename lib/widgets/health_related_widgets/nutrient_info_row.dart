@@ -65,7 +65,7 @@ class NutrientInfoRow extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerRight,
               child: Text(
-                "${(percent * 100).toStringAsFixed(1)}%",  // Convert to percentage
+                "${percent.toStringAsFixed(1)}%",
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
