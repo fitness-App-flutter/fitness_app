@@ -35,7 +35,7 @@ class NutrientProvider with ChangeNotifier {
   }
 
   Future<void> updateNutrient(String type, int value, String userId) async {
-    final int intValue = value.round(); // or use .toInt() or .floor()
+    final int intValue = value.round();
     if (type == "Fat") _fat = (_fat + intValue).clamp(0, double.infinity).toInt();
     if (type == "Protein") _protein = (_protein + intValue).clamp(0, double.infinity).toInt();
     if (type == "Carbs") _carbs = (_carbs + intValue).clamp(0, double.infinity).toInt();
@@ -71,9 +71,9 @@ class NutrientProvider with ChangeNotifier {
         'totalCalories': totalCalories,
         'timestamp': FieldValue.serverTimestamp(),
       });
-      print('✅ Firestore: Save successful');
+      print('Firestore: Save successful');
     } catch (e) {
-      print('❌ Firestore: Save failed → $e');
+      print('Firestore: Save failed → $e');
     }
   }
 

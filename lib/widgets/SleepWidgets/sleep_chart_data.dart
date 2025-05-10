@@ -1,43 +1,41 @@
-import 'package:fl_chart/fl_chart.dart';
+import 'package:fitness_app/core/utils/schedule_logic.dart';
 import 'package:flutter/material.dart';
+import 'package:fl_chart/fl_chart.dart';
 
-List<double> getSleepDataForPeriod(String period) {
-  switch (period) {
-    case 'Today':
-      return [1, 5.0, 7.2, 6.8, 5.5, 8.0, 7.0];
-    case 'Weekly':
-      return [6.5, 7.0, 6.8, 7.2, 6.5, 8.0, 7.5];
-    case 'Monthly':
-      return [7.0, 6.8, 7.2, 6.5];
-    default:
-      return [1, 5.0, 7.2, 6.8, 5.5, 8.0, 7.0];
+final ScheduleLogic _scheduleLogic = ScheduleLogic();
+final String _userId = 'userId';
+
+Future<List<double>> getRealSleepData() async {
+  try {
+    final durations = await _scheduleLogic.loadSleepDurations(userId: _userId);
+    return [
+      durations['Saturday'] ?? 0,
+      durations['Sunday'] ?? 0,
+      durations['Monday'] ?? 0,
+      durations['Tuesday'] ?? 0,
+      durations['Wednesday'] ?? 0,
+      durations['Thursday'] ?? 0,
+      durations['Friday'] ?? 0,
+    ];
+  } catch (e) {
+    print('Error fetching sleep data: $e');
+    return [0, 0, 0, 0, 0, 0, 0];
   }
 }
 
-List<String> getLabelsForPeriod(String period) {
-  switch (period) {
-    case 'Today':
-      return ['6AM', '9AM', '12PM', '3PM', '6PM', '9PM', '12AM'];
-    case 'Weekly':
-      return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    case 'Monthly':
-      return ['Week1', 'Week2', 'Week3', 'Week4'];
-    default:
-      return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  }
+List<String> getWeeklyLabels() {
+  return ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 }
 
 List<BarChartGroupData> getBarGroups(
     int? touchedIndex, Function(int) onBarTap, List<double> sleepData) {
   return List.generate(sleepData.length, (index) {
-    double sleepHours = sleepData[index];
-
     return BarChartGroupData(
       x: index,
       barRods: [
         BarChartRodData(
           fromY: 0,
-          toY: sleepHours,
+          toY: sleepData[index],
           width: 20,
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(16),
