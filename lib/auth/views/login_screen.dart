@@ -127,10 +127,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomButton(
                       text: "Login",
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const OverviewPage()));
                         if (formKey.currentState!.validate()) {
                           setState(() => isLoading = true);
                           BlocProvider.of<LoginCubit>(context).login(
@@ -140,7 +136,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                       },
                       backgroundColor: const Color(0xff626ae7),
+                      textColor: Colors.white,
                     ),
+
 
                     const SizedBox(height: 120),
 

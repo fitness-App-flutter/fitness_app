@@ -76,7 +76,6 @@ class _SleepPageState extends State<SleepPage> {
                      SizedBox(height: 20),
                      SleepChart(),
                      SizedBox(height: 20),
-                     SleepStatistics(),
                      SizedBox(height: 20),
                     SleepSchedule(),
                   ],
