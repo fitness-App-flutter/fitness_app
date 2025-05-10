@@ -1,8 +1,6 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:path_provider/path_provider.dart';
 
 class ProfileController extends ChangeNotifier {
   // State fields
@@ -12,10 +10,11 @@ class ProfileController extends ChangeNotifier {
   String _email = "";
   int _weight = 0;
   int _height = 0;
-  String? _profileImagePath;
-  String? get profileImagePath => _profileImagePath;
+  String? _profileImageUrl;
+  String? get profileImageUrl => _profileImageUrl;
   bool _isLoading = true;
   bool get isLoading => _isLoading;
+
 
 
 
@@ -66,13 +65,7 @@ class ProfileController extends ChangeNotifier {
       _weight = (data?['weight'] ?? weight).toInt();
       _height = (data?['height'] ?? height).toInt();
       _isPrivate = data?['isPrivate'] ?? false;
-      final appDir = await getApplicationDocumentsDirectory();
-      final imagePath = '${appDir.path}/profile_pic.jpg';
-      final file = File(imagePath);
-      if (await file.exists()) {
-        _profileImagePath = imagePath;
-      }
-
+      _profileImageUrl = data?['profileImageUrl'];
 
       // Sync controllers
       nameController.text = _name;
@@ -99,14 +92,11 @@ class ProfileController extends ChangeNotifier {
       print("Error updating Firestore data: $e");
     }
   }
-  Future<void> updateProfileImage(File newImage) async {
-    final appDir = await getApplicationDocumentsDirectory();
-    final savedImage = await newImage.copy('${appDir.path}/profile_pic.jpg');
-
-    _profileImagePath = savedImage.path;
+  Future<void> updateProfileImage(String imageUrl) async {
+    _profileImageUrl = imageUrl;
+    await _updateFirestoreData({'profileImageUrl': imageUrl});
     notifyListeners();
   }
-
 
   // Reauthentication
   Future<void> _reauthenticateIfNeeded(String? password) async {

@@ -1,4 +1,4 @@
-import 'package:fitness_app/screens/alarm_page.dart';
+import 'package:fitness_app/screens/schedule_screen.dart';
 import 'package:flutter/material.dart';
 
 class SleepSchedule extends StatelessWidget {
@@ -25,14 +25,14 @@ class SleepSchedule extends StatelessWidget {
             _buildScheduleCard(
               context,
               "🛏 Bedtime",
-              "22:00 pm",
               const Color(0xffea926e),
+              ScheduleType.sleep,
             ),
             _buildScheduleCard(
               context,
               "🔔 Wake up",
-              "07:30 am",
               const Color(0xff7F55E0),
+              ScheduleType.wake,
             ),
           ],
         ),
@@ -43,28 +43,34 @@ class SleepSchedule extends StatelessWidget {
   static Widget _buildScheduleCard(
       BuildContext context,
       String title,
-      String time,
       Color color,
+      ScheduleType type,
       ) {
     return Container(
       width: 150,
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 6,
+            offset: Offset(0, 4),
+          ),
+        ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: Text(
                   title,
                   style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
                 ),
@@ -73,7 +79,12 @@ class SleepSchedule extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const AlarmScreen(title: "")),
+                    MaterialPageRoute(
+                      builder: (context) => ScheduleScreen(
+                        title: title,
+                        type: type,
+                      ),
+                    ),
                   );
                 },
                 child: const Icon(
@@ -84,18 +95,8 @@ class SleepSchedule extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 5),
-          Text(
-            time,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
         ],
       ),
     );
   }
 }
-

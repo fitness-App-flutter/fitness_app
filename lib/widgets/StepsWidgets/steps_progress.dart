@@ -72,7 +72,7 @@ class _StepsProgressState extends State<StepsProgress> {
               const Icon(
                 Icons.directions_walk,
                 size: 30,
-                color: const Color(0xFF636AE8),
+                color:  Color(0xFF636AE8),
               ),
               const SizedBox(height: 8),
               Text(

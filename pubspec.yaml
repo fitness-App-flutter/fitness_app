@@ -42,10 +42,11 @@ dependencies:
   file: ^7.0.1
   firebase_storage: ^12.4.5
   flutter_animate: ^4.2.0
-  android_alarm_manager_plus: ^4.0.7
-  path_provider: ^2.1.5
-  path: ^1.9.1
 
+
+  just_audio: ^0.9.35
+
+  android_alarm_manager_plus: ^4.0.7
 
 
 
@@ -62,6 +63,7 @@ flutter:
   assets:
     - assets/images/App_Logo.jpg
     - assets/images/health_icon.jpg
+    - assets/images/sleep_icon.jpg
     - assets/images/steps_icon.jpg
     - assets/images/workout_icon.jpg
     - assets/images/runner.jpg
@@ -72,6 +74,31 @@ flutter:
     - assets/images/bmi_normal.gif
     - assets/images/bmi_overweight.gif
     - assets/images/bmi_obese.gif
+    - assets/sounds/alarm.mp3
+    - assets/images/Exercises_images/exercises_gifs_images/arms/Bicep_curl.gif
+    - assets/images/Exercises_images/exercises_gifs_images/arms/forearm.gif
+    - assets/images/Exercises_images/exercises_gifs_images/arms/tricep_extension.gif
+    - assets/images/Exercises_images/exercises_gifs_images/back/dead_lift.gif
+    - assets/images/Exercises_images/exercises_gifs_images/back/one_dumbel_row.gif
+    - assets/images/Exercises_images/exercises_gifs_images/back/pull_ups.gif
+    - assets/images/Exercises_images/exercises_gifs_images/chest/Bench_Press.gif
+    - assets/images/Exercises_images/exercises_gifs_images/chest/fly_machine.gif
+    - assets/images/Exercises_images/exercises_gifs_images/chest/incline_bench_press.gif
+    - assets/images/Exercises_images/exercises_gifs_images/core/crunch.gif
+    - assets/images/Exercises_images/exercises_gifs_images/core/hyper_extension.gif
+    - assets/images/Exercises_images/exercises_gifs_images/core/plank.gif
+    - assets/images/Exercises_images/exercises_gifs_images/legs/calf_raises.gif
+    - assets/images/Exercises_images/exercises_gifs_images/legs/lunges.gif
+    - assets/images/Exercises_images/exercises_gifs_images/legs/squats.gif
+    - assets/images/Exercises_images/exercises_gifs_images/shoulders/face_pulls.gif
+    - assets/images/Exercises_images/exercises_gifs_images/shoulders/lateral_rasies.gif
+    - assets/images/Exercises_images/exercises_gifs_images/shoulders/over_head.gif
+    - assets/images/Exercises_images/exercises_main_images/arms.jpeg
+    - assets/images/Exercises_images/exercises_main_images/back.jpeg
+    - assets/images/Exercises_images/exercises_main_images/chest.jpeg
+    - assets/images/Exercises_images/exercises_main_images/core.jpeg
+    - assets/images/Exercises_images/exercises_main_images/legs.jpeg
+    - assets/images/Exercises_images/exercises_main_images/shoulders.jpeg
 fonts:
   - family: NotoSans
     fonts:

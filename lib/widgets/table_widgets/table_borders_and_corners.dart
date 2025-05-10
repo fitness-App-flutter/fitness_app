@@ -49,13 +49,13 @@ class TableBordersAndCorners extends StatelessWidget {
             // Table Rows
             WorkoutTableRow(
               exercise: 'Bench Press',
-              muscles: ['Chest', 'Shoulders', 'Triceps'],
+              muscles: const ['Chest', 'Shoulders', 'Triceps'],
               percentage: '65%',
               percentageColor: MyColors.table_orange,
             ),
             WorkoutTableRow(
               exercise: 'Leg Press',
-              muscles: ['Quads', 'Hamstrings', 'Glutes'],
+              muscles: const ['Quads', 'Hamstrings', 'Glutes'],
               percentage: '90%',
               percentageColor: MyColors.table_green,
             ),

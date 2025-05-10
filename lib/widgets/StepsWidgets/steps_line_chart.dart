@@ -49,7 +49,7 @@ class StepsLineChart extends StatelessWidget {
         ),
         borderData: FlBorderData(show: false),
         minX: 0,
-        maxX: stepData.length > 0 ? stepData.length.toDouble() - 1 : 0,
+        maxX: stepData.isNotEmpty ? stepData.length.toDouble() - 1 : 0,
         lineBarsData: [
           LineChartBarData(
             spots: List.generate(

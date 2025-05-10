@@ -167,7 +167,7 @@ class StepCounterLogic extends ChangeNotifier {
           .doc(userId)
           .collection('daily_steps')
           .doc(today)
-          .collection('hourly') // نضيف مجموعة `hourly` لتخزين البيانات لكل ساعة
+          .collection('hourly')
           .doc(hour)
           .set({
         'steps': _stepsToday,

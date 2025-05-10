@@ -43,7 +43,7 @@ class HeaderSection extends StatelessWidget {
           // Right Side: User Avatar
           Consumer<ProfileController>(
             builder: (context, controller, _) {
-              final imageUrl = controller.profileImagePath;
+              final imageUrl = controller.profileImageUrl;
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
