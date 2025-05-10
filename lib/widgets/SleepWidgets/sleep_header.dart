@@ -33,7 +33,7 @@ class SleepHeader extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         const Text(
-          "Your average time of\nsleep a day is ",
+          "Track your weekly sleep and maintain a healthy routine.",
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -41,12 +41,12 @@ class SleepHeader extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
+        const SizedBox(height: 4),
         const Text(
-          "7h 31 min",
+          "Set your bedtime and wake time, and view your stats.",
           style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.blue,
+            fontSize: 16,
+            color: Colors.grey,
           ),
           textAlign: TextAlign.center,
         ),
