@@ -11,62 +11,57 @@ class SleepChart extends StatefulWidget {
 
 class _SleepChartState extends State<SleepChart> {
   int? touchedIndex;
+  List<double> sleepData = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSleepData();
+  }
+
+  Future<void> _loadSleepData() async {
+    final data = await getRealSleepData();
+    setState(() {
+      sleepData = data;
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    List<double> sleepData = getWeeklySleepData();
-    double maxSleep = sleepData.reduce((a, b) => a > b ? a : b);
-    List<String> labels = getWeeklyLabels();
+    if (isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
 
-    return Column(
-      children: [
-        const SizedBox(height: 10),
-        GestureDetector(
-          onTapDown: (_) => setState(() => touchedIndex = null),
-          child: Container(
+    final maxSleep = sleepData.isNotEmpty
+        ? (sleepData.reduce((a, b) => a > b ? a : b) + 2)
+        : 8.0;
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        children: [
+          const SizedBox(height: 16),
+          SizedBox(
             height: 200,
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 4,
-                  offset: Offset(0, 2),
-                )
-              ],
-            ),
             child: BarChart(
               BarChartData(
                 minY: 0,
-                maxY: maxSleep + 2,
-                groupsSpace: 20,
-                barTouchData: BarTouchData(
-                  touchCallback: (FlTouchEvent event, barTouchResponse) {
-                    if (barTouchResponse != null && barTouchResponse.spot != null) {
-                      setState(() {
-                        touchedIndex = barTouchResponse.spot!.touchedBarGroupIndex;
-                      });
-                    }
-                  },
-                  touchTooltipData: BarTouchTooltipData(
-                    getTooltipItem: (_, __, ___, ____) => null,
-                  ),
-                ),
+                maxY: maxSleep,
+                barGroups: getBarGroups(touchedIndex, (index) {
+                  setState(() => touchedIndex = index);
+                }, sleepData),
                 titlesData: FlTitlesData(
-                  leftTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
                       getTitlesWidget: (value, meta) {
-                        if (value < 0 || value >= sleepData.length) return const Text('');
+                        final days = getWeeklyLabels();
                         return Padding(
                           padding: const EdgeInsets.only(top: 8.0),
                           child: Text(
-                            labels[value.toInt()],
+                            days[value.toInt()],
                             style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
@@ -76,25 +71,43 @@ class _SleepChartState extends State<SleepChart> {
                       },
                     ),
                   ),
-                  topTitles: const AxisTitles(
+                  leftTitles: const AxisTitles(
                     sideTitles: SideTitles(showTitles: false),
                   ),
                   rightTitles: const AxisTitles(
                     sideTitles: SideTitles(showTitles: false),
                   ),
+                  topTitles: const AxisTitles(
+                    sideTitles: SideTitles(showTitles: false),
+                  ),
                 ),
                 borderData: FlBorderData(show: false),
                 gridData: const FlGridData(show: false),
-                barGroups: getBarGroups(touchedIndex, (index) {
-                  setState(() {
-                    touchedIndex = index;
-                  });
-                }, sleepData),
+                barTouchData: BarTouchData(
+                  touchCallback: (FlTouchEvent event, response) {
+                    if (response?.spot != null) {
+                      setState(() {
+                        touchedIndex = response?.spot?.touchedBarGroupIndex;
+                      });
+                    }
+                  },
+                ),
               ),
             ),
           ),
-        ),
-      ],
+          if (touchedIndex != null) ...[
+            const SizedBox(height: 16),
+            Text(
+              '${getWeeklyLabels()[touchedIndex!]}: '
+                  '${sleepData[touchedIndex!].toStringAsFixed(1)}  Hours',
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ],
+      ),
     );
   }
 }

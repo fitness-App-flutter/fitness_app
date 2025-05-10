@@ -6,7 +6,7 @@ class ScheduleLogic {
 
   Future<void> saveSchedule({
     required String userId,
-    required String type, // 'sleep' أو 'wake'
+    required String type,
     required Map<String, TimeOfDay> times,
   }) async {
     try {
