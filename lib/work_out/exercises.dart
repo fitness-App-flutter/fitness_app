@@ -1,14 +1,15 @@
 import 'package:fitness_app/work_out/exercise_details_screan.dart';
 import 'package:flutter/material.dart';
 import 'exersice_title_images/title_images.dart';
-
-class ExerciseScreen extends StatelessWidget {
+// Ahmad Atef
+class ExerciseUI extends StatelessWidget {
   final String title;
 
-  const ExerciseScreen({
+  const ExerciseUI({
     Key? key,
     required this.title,
   }) : super(key: key);
+
 
   List<ExerciseDetail> get _exercises {
     final lowerTitle = title.toLowerCase();

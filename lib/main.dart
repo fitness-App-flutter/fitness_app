@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness_app/auth/cubit/login_cubit.dart';
 import 'package:fitness_app/auth/cubit/reset_password_cubit.dart';
 import 'package:fitness_app/auth/cubit/sign_up_cubit.dart';
-import 'package:fitness_app/auth/views/login_screen.dart';
+import 'package:fitness_app/auth/views/health_journey_screen.dart';
 import 'package:fitness_app/core/utils/step_counter_logic.dart';
 import 'package:fitness_app/firebase_options.dart';
 import 'package:fitness_app/widgets/health_related_widgets/nutrient_provider.dart';
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
         initialRoute: AppRoutes.home,
         onGenerateRoute: AppRoutes.generateRoute,
 
-        home:  const LoginScreen(),
+        home:   HealthJourneyScreen(),
 
       ),
     );

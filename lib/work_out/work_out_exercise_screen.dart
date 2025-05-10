@@ -1,6 +1,9 @@
 import 'package:fitness_app/work_out/exercises.dart';
 import 'package:flutter/material.dart';
 
+
+
+// Ahmad Atef
 class WorkoutExercisesScreen extends StatelessWidget {
   const WorkoutExercisesScreen({super.key});
 
@@ -53,9 +56,10 @@ class WorkoutExercisesScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ExerciseScreen(title: item.title)),
+                  MaterialPageRoute(builder: (context) => ExerciseUI(title: item.title)),
                 );
               },
+
             ),
           );
         },
