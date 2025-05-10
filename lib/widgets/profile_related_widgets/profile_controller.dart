@@ -17,6 +17,7 @@ class ProfileController extends ChangeNotifier {
 
 
 
+
   // Controllers
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
