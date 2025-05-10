@@ -1,6 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'chart_period_selector.dart';
 import 'sleep_chart_data.dart';
 
 class SleepChart extends StatefulWidget {
@@ -12,35 +11,21 @@ class SleepChart extends StatefulWidget {
 
 class _SleepChartState extends State<SleepChart> {
   int? touchedIndex;
-  String selectedPeriod = 'Today';
 
   @override
   Widget build(BuildContext context) {
-    List<double> sleepData = getSleepDataForPeriod(selectedPeriod);
+    List<double> sleepData = getWeeklySleepData();
     double maxSleep = sleepData.reduce((a, b) => a > b ? a : b);
+    List<String> labels = getWeeklyLabels();
 
     return Column(
       children: [
-        ChartPeriodSelector(
-          selectedPeriod: selectedPeriod,
-          onPeriodChanged: (period) {
-            setState(() {
-              selectedPeriod = period;
-              touchedIndex = null;
-            });
-          },
-        ),
         const SizedBox(height: 10),
         GestureDetector(
           onTapDown: (_) => setState(() => touchedIndex = null),
           child: Container(
             height: 200,
-            padding: const EdgeInsets.only(
-              top: 16,
-              bottom: 16,
-              left: 8,
-              right: 8,
-            ),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
@@ -77,10 +62,7 @@ class _SleepChartState extends State<SleepChart> {
                     sideTitles: SideTitles(
                       showTitles: true,
                       getTitlesWidget: (value, meta) {
-                        if (value < 0 || value >= sleepData.length) {
-                          return const Text('');
-                        }
-                        List<String> labels = getLabelsForPeriod(selectedPeriod);
+                        if (value < 0 || value >= sleepData.length) return const Text('');
                         return Padding(
                           padding: const EdgeInsets.only(top: 8.0),
                           child: Text(
