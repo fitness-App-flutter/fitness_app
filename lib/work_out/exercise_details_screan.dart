@@ -1,10 +1,9 @@
 import 'package:fitness_app/core/utils/app_colors.dart';
 import 'package:fitness_app/core/utils/color_extension.dart';
 import 'package:flutter/material.dart';
-import 'dart:async'; // استيراد مكتبة async للتعامل مع المؤقت
+import 'dart:async';
 
 class ExerciseDetailScreen extends StatefulWidget {
-  // تغيير StatelessWidget إلى StatefulWidget
   final String name;
   final String reps;
   final String imageUrl;
@@ -18,7 +17,7 @@ class ExerciseDetailScreen extends StatefulWidget {
 
   @override
   _ExerciseDetailScreenState createState() =>
-      _ExerciseDetailScreenState(); // إنشاء الـ State
+      _ExerciseDetailScreenState();
 }
 
 class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
